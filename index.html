@@ -44,28 +44,44 @@
     .button--ghost { border-color: rgba(255,255,255,.55); background: transparent; color: var(--white); }
     .button--ghost:hover { background: var(--white); color: var(--ink); }
 
-    .site-header { position: fixed; z-index: 100; top: 0; right: 0; left: 0; width: 100%; background: var(--ink-deep); box-shadow: 0 8px 24px rgba(9,29,49,.18); color: var(--white); }
-    .nav { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 72px; border-bottom: 1px solid rgba(255,255,255,.2); }
-    .brand { display: flex; align-items: center; gap: 12px; font-size: 1rem; font-weight: 700; letter-spacing: .28em; }
-    .brand img { width: 42px; height: 42px; object-fit: contain; filter: brightness(0) invert(1); }
-    .nav-links { position: absolute; z-index: 101; top: 72px; right: 0; left: 0; display: none; padding: 24px 16px; background: var(--ink-deep); flex-direction: column; align-items: start; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .site-header { position: fixed; z-index: 100; top: 0; right: 0; left: 0; width: 100%; color: var(--white); }
+    .nav { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 60px; margin-top: 12px; padding: 0 10px 0 18px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(9,29,49,.72); box-shadow: 0 14px 34px rgba(9,29,49,.28); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 700; letter-spacing: .28em; }
+    .brand img { width: 36px; height: 36px; object-fit: contain; filter: brightness(0) invert(1); }
+    .nav-links { position: absolute; z-index: 101; top: calc(100% + 10px); right: 0; left: 0; display: none; padding: 22px; border: 1px solid rgba(255,255,255,.14); border-radius: 26px; background: rgba(9,29,49,.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); flex-direction: column; align-items: start; gap: 16px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
     .nav-links.is-open { display: flex; }
     .nav-links a { opacity: .8; transition: opacity .2s ease; }
     .nav-links a:hover { opacity: 1; }
-    .nav-action { display: none; padding: 12px 15px; border: 1px solid rgba(255,255,255,.55); font-size: .65rem; font-weight: 700; letter-spacing: .1em; }
+    .nav-action { display: none; padding: 12px 22px; border: 1px solid var(--gold); border-radius: 999px; background: var(--gold); color: var(--ink-deep); font-size: .65rem; font-weight: 700; letter-spacing: .1em; transition: background .2s ease, transform .2s ease; }
+    .nav-action:hover { background: var(--gold-light); transform: translateY(-2px); }
     .menu-toggle { display: block; border: 0; background: none; color: inherit; font-size: 1.5rem; }
     .menu-toggle:focus-visible, .nav-links a:focus-visible, .brand:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 5px; }
     section, .quote-ribbon, footer { scroll-margin-top: 72px; }
 
-    .hero { position: relative; display: flex; min-height: 680px; align-items: end; overflow: hidden; background: var(--ink-deep); color: var(--white); }
-    .hero::before { position: absolute; inset: -3%; background: linear-gradient(90deg, rgba(5,21,35,.86) 0%, rgba(5,21,35,.45) 46%, rgba(5,21,35,.08) 100%), url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=2200&q=85') center/cover; content: ''; transform: rotate(-1.5deg) scale(1.04); }
-    .hero::after { display: none; position: absolute; right: 9%; bottom: 22%; width: 180px; height: 180px; border: 1px solid rgba(229,189,107,.6); border-radius: 50%; content: ''; }
-    .hero-content { position: relative; z-index: 1; width: calc(100% - 16px); margin-left: 16px; padding: 150px 0 120px; }
-    .hero h1 { max-width: 900px; margin: 0; font: 500 clamp(5rem, 15vw, 12rem)/.78 var(--serif); letter-spacing: -.08em; }
-    .hero-subtitle { margin: 30px 0 8px; color: var(--gold-light); font: italic 500 clamp(1.25rem, 2.6vw, 2rem) var(--serif); }
-    .hero-copy { max-width: 355px; margin: 0 0 30px; color: rgba(255,255,255,.8); font-size: 1rem; }
-    .hero-actions { display: grid; gap: 12px; }
-    .hero-actions .button { width: 50%; min-height: 56px; padding: 10px 12px; text-align: center; }
+    .hero { position: relative; display: flex; min-height: 640px; align-items: center; overflow: hidden; background: var(--ink-deep); color: var(--white); }
+    .hero::before { position: absolute; inset: -8% -3%; background: linear-gradient(90deg, rgba(5,21,35,.9) 0%, rgba(5,21,35,.55) 44%, rgba(5,21,35,.12) 100%), url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=2200&q=85') center/cover; content: ''; transform: rotate(-1.5deg) scale(1.08) translateY(var(--hero-shift, 0px)); }
+    .hero::after { display: none; }
+    .hero-content { position: relative; z-index: 1; width: calc(100% - 24px); margin-left: 24px; padding: 130px 0 90px; }
+    .hero h1 { margin: 0; font: 500 clamp(2rem, 8.5vw, 7rem)/1 var(--serif); letter-spacing: -.02em; white-space: nowrap; }
+    .hero h1 .type-text { white-space: nowrap; }
+    .hero h1 .type-text .w-echo { font-style: italic; font-weight: 500; }
+    .hero h1 .type-text .w-strong { display: inline-block; font-family: var(--sans); font-weight: 800; letter-spacing: -.03em; text-transform: uppercase; color: var(--gold-light); }
+    /* Distinction de RENOUVEAU une fois le texte écrit */
+    .hero h1.type-done .w-strong { background: linear-gradient(100deg, var(--gold) 0%, #fff3d6 42%, var(--gold-light) 58%, var(--gold) 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; text-shadow: 0 0 26px rgba(229,189,107,.45); animation: renouveau-shine 3.4s ease-in-out infinite, renouveau-pop .7s cubic-bezier(.2,.9,.25,1.25) both; }
+    @keyframes renouveau-shine { 0% { background-position: 130% 0; } 100% { background-position: -30% 0; } }
+    @keyframes renouveau-pop { from { transform: scale(.9); filter: brightness(1.8); } to { transform: scale(1); filter: brightness(1); } }
+    .hero h1 .type-cursor { display: inline-block; width: .06em; margin-left: .04em; color: var(--gold-light); font-weight: 300; animation: caret-blink 1s step-end infinite; }
+    .hero h1.type-done .type-cursor { animation: none; opacity: 0; }
+    @keyframes caret-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero h1.type-done .w-strong { animation: none; -webkit-text-fill-color: initial; color: var(--gold-light); background: none; }
+    }
+    .hero-subtitle { margin: 26px 0 8px; color: var(--gold-light); font: italic 500 clamp(1.25rem, 2.6vw, 2rem) var(--serif); }
+    .hero-copy { max-width: 420px; margin: 0 0 34px; color: rgba(255,255,255,.82); font-size: 1.02rem; }
+    .hero-actions { display: flex; align-items: center; gap: 14px; }
+    .hero-actions .button { min-height: 56px; padding: 0 30px; border-radius: 999px; text-align: center; }
+    .hero-round { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: transparent; color: var(--white); font-size: 1.3rem; transition: background .2s ease, color .2s ease, transform .2s ease; }
+    .hero-round:hover { background: var(--white); color: var(--ink-deep); transform: translateY(-2px); }
     .scroll-note { display: none; position: absolute; right: 0; bottom: 100px; align-items: center; gap: 13px; color: rgba(255,255,255,.65); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
     .scroll-note::before { width: 1px; height: 54px; background: var(--gold); content: ''; }
     .hero-wave { position: absolute; z-index: 2; right: 0; bottom: -1px; left: 0; line-height: 0; pointer-events: none; }
@@ -85,10 +101,44 @@
     .positioning-main, .positioning-secondary { min-width: 0; }
     .positioning-secondary { padding-top: 28px; border-top: 1px solid var(--line); }
 
-    .events { background: var(--paper); color: var(--ink); }
+    /* ==== Ruban de texte + galerie encadrée ==== */
+    .marquee-ribbon { overflow: hidden; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-deep); color: var(--white); }
+    .marquee-track { display: flex; width: max-content; animation: marquee-scroll 26s linear infinite; }
+    .marquee-track span { display: inline-flex; align-items: center; padding: 0 28px; font: 500 clamp(1.1rem, 2.4vw, 1.7rem)/1 var(--serif); font-style: italic; white-space: nowrap; }
+    .marquee-track span::after { content: '✶'; margin-left: 56px; color: var(--gold-light); font-style: normal; }
+    .marquee-ribbon:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .gallery { background: var(--paper); }
+    .gallery-head { margin-bottom: 40px; }
+    .gallery-mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(100px, 1fr)); gap: 3px; width: calc(100% + 16px); margin-left: -8px; }
+    .mosaic-item { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+    .mosaic-item img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82); transition: filter .4s ease, transform .6s ease; }
+    .mosaic-item:hover img { filter: saturate(1); transform: scale(1.05); }
+    .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; align-self: center; height: 72%; }
+    .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; }
+    .mosaic-item:nth-child(4) { grid-column: 3; grid-row: 1; }
+    .mosaic-item:nth-child(5) { grid-column: 3; grid-row: 2; }
+    .mosaic-item:nth-child(6) { grid-column: 4; grid-row: 1 / 3; align-self: center; height: 72%; }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+    @media (min-width: 801px) {
+      .gallery-mosaic { grid-template-rows: repeat(2, minmax(170px, 1fr)); gap: 12px; width: 100%; margin-left: 0; align-items: stretch; }
+      .mosaic-item { aspect-ratio: auto; }
+      .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; align-self: center; height: 72%; transform: none; }
+      .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; transform: none; }
+      .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; transform: none; }
+      .mosaic-item:nth-child(4) { grid-column: 3; grid-row: 1; transform: none; }
+      .mosaic-item:nth-child(5) { grid-column: 3; grid-row: 2; transform: none; }
+      .mosaic-item:nth-child(6) { grid-column: 4; grid-row: 1 / 3; align-self: center; height: 72%; transform: none; }
+    }
+
+    .events { background: url('bkg.jpeg') center/cover fixed; color: var(--ink); }
     .events-head { display: block; margin-bottom: 34px; }
-    .events-title { margin: 0; font: 500 clamp(2.25rem, 6vw, 4.2rem)/.98 var(--serif); letter-spacing: -.04em; }
-    .events-desc { max-width: 440px; margin: 18px 0 0; color: rgba(16,44,73,.7); font: italic 500 1.15rem/1.45 var(--serif); }
+    .events-title { margin: 0; color: var(--ink-deep); font: 600 clamp(2.8rem, 10vw, 5.4rem)/.92 var(--serif); letter-spacing: -.04em; text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+    .events-desc { max-width: 480px; margin: 18px 0 0; color: var(--ink-deep); font: italic 600 clamp(1.15rem, 2.6vw, 1.55rem)/1.35 var(--serif); text-shadow: 0 1px 0 rgba(255,255,255,.3); }
 
     .events-stage { position: relative; overflow: hidden; padding: 40px 20px 36px; border-radius: 24px; background: var(--ink-deep); color: var(--white); }
     .events-stage-head { margin-bottom: 22px; }
@@ -203,6 +253,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .partner-line, .choir-track, .quote-run { animation: none; }
+      .event-carousel { scroll-behavior: auto; }
     }
 
     footer { padding: 70px 0 25px; background: var(--ink-deep); color: var(--white); }
@@ -217,6 +268,25 @@
     .newsletter button { border: 0; background: none; color: var(--gold-light); cursor: pointer; font-size: 1.2rem; }
     .footer-bottom { display: grid; gap: 8px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.42); font-size: .65rem; }
 
+    /* ==== Scroll reveal effects ==== */
+    [data-reveal] { opacity: 0; transform: translateY(38px); transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1); transition-delay: var(--reveal-delay, 0ms); will-change: opacity, transform; }
+    [data-reveal="fade"] { transform: none; }
+    [data-reveal="scale"] { transform: translateY(38px) scale(.94); }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+
+    /* Masked title reveal */
+    [data-reveal-title] { position: relative; }
+    [data-reveal-title] > span { display: inline-block; transform: translateY(105%); opacity: 0; transition: transform 1s cubic-bezier(.19,1,.22,1), opacity 1s ease; }
+    [data-reveal-title].is-visible > span { transform: translateY(0); opacity: 1; }
+
+    /* Hero parallax layers */
+    .hero::before { will-change: transform; }
+    .hero-content { will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal], [data-reveal-title] > span { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
     @media (min-width: 801px) {
       .wrap { width: min(1180px, calc(100% - 48px)); }
       html { scroll-padding-top: 90px; }
@@ -224,13 +294,12 @@
       .nav { min-height: 90px; }
       .nav-links { position: static; display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); padding: 0; background: none; flex-direction: row; }
       .nav-links.is-open { display: flex; }
-      .nav-action { display: inline-flex; }
+      .nav-action { display: inline-flex; align-items: center; }
       .menu-toggle { display: none; }
-      .hero { min-height: 720px; }
-      .hero-content { width: 100%; margin-left: 0; padding-bottom: 150px; }
-      .hero::after { display: block; }
+      .hero { min-height: 760px; }
+      .hero-content { width: calc(100% - 40px); margin-left: 40px; padding: 150px 0 120px; }
       .scroll-note { display: flex; }
-      .hero-actions { display: flex; flex-wrap: wrap; }
+      .hero-actions { flex-wrap: wrap; }
       .hero-actions .button { width: auto; }
       section { padding: 120px 0; }
       .positioning-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 80px; align-items: start; }
@@ -268,6 +337,7 @@
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Ouvrir le menu">☰</button>
       <div class="nav-links" id="main-menu">
         <a href="#programmation">Évenements</a>
+        <a href="#galerie">Galerie</a>
         <a href="#partenaires">Partenaires</a>
         <a href="#vision">À propos</a>
         <a href="#contact">Contact</a>
@@ -280,12 +350,12 @@
     <section class="hero" id="accueil" aria-labelledby="hero-title">
       <div class="wrap hero-content">
         <p class="eyebrow">Scène lyrique & chorale</p>
-        <h1 id="hero-title">ALTO</h1>
-        <p class="hero-subtitle">L'écho d'un renouveau.</p>
+        <h1 id="hero-title" aria-label="L'écho d'un renouveau"><span class="type-text" aria-hidden="true"></span><span class="type-cursor" aria-hidden="true">|</span></h1>
+        <p class="hero-subtitle">Faire vibrer les voix.</p>
         <p class="hero-copy">La scène lyrique et chorale entre dans une nouvelle ère.</p>
         <div class="hero-actions">
-          <a class="button" href="#vision">Découvrir le mouvement</a>
-          <a class="button button--ghost" href="#programmation">Voir la programmation</a>
+          <a class="button" href="#vision">Découvrir ALTO</a>
+          <a class="hero-round" href="#programmation" aria-label="Voir la programmation">→</a>
         </div>
       </div>
       <span class="scroll-note">Faire vibrer les voix</span>
@@ -297,25 +367,49 @@
       </div> -->
     </section>
 
-    <div class="quote-ribbon" role="note" aria-label="Citation ALTO">
+    <!-- <div class="quote-ribbon" role="note" aria-label="Citation ALTO">
       <div class="quote-track">
         <div class="quote-run">
           <p>« Lorsque les voix se rencontrent, un espace nouveau apparaît. »</p>
           <p aria-hidden="true">« Lorsque les voix se rencontrent, un espace nouveau apparaît. »</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <section class="positioning" id="vision" aria-labelledby="positioning-title">
       <div class="wrap positioning-grid">
         <div class="positioning-main">
           <!-- <p class="eyebrow">01 / Le positionnement</p> -->
-          <h2 class="section-title" id="positioning-title">L'écho d'un renouveau</h2>
-          <p class="section-intro">ALTO accompagne la renaissance lyrique avec une conviction simple : lorsque les voix se rencontrent, elles ouvrent un espace nouveau.</p>
+          <h2 class="section-title" id="positioning-title" data-reveal-title><span>L'écho d'un renouveau</span></h2>
+          <p class="section-intro" data-reveal style="--reveal-delay:120ms">ALTO accompagne la renaissance lyrique avec une conviction simple : lorsque les voix se rencontrent, elles ouvrent un espace nouveau.</p>
         </div>
-        <div class="positioning-secondary">
+        <div class="positioning-secondary" data-reveal style="--reveal-delay:200ms">
           <p class="section-intro">Un mouvement vivant, exigeant et généreux, porté par la puissance du collectif.</p>
           <a class="arrow-link" href="#manifeste">En savoir plus sur notre vision</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-ribbon" role="note" aria-label="Mots ALTO">
+      <div class="marquee-track" aria-hidden="true">
+        <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
+        <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
+      </div>
+    </div>
+
+    <section class="gallery" id="galerie" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="gallery-head">
+          <h2 class="section-title" id="gallery-title" data-reveal-title><span>En images</span></h2>
+          <p class="section-intro" data-reveal style="--reveal-delay:120ms">Des instants suspendus, saisis au fil des rencontres et des concerts — chaque cadre s'anime tour à tour.</p>
+        </div>
+        <div class="gallery-mosaic" data-reveal="fade">
+          <figure class="mosaic-item"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=800&q=85" alt="Choeur en concert" loading="lazy"></figure>
+          <figure class="mosaic-item"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=800&q=85" alt="Chanteuse face au public" loading="lazy"></figure>
+          <figure class="mosaic-item"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=800&q=85" alt="Répétition en groupe" loading="lazy"></figure>
+          <figure class="mosaic-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85" alt="Portrait d'une chanteuse" loading="lazy"></figure>
+          <figure class="mosaic-item"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=800&q=85" alt="Musiciens en scène" loading="lazy"></figure>
+          <figure class="mosaic-item"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=85" alt="Portrait d'une musicienne" loading="lazy"></figure>
         </div>
       </div>
     </section>
@@ -323,16 +417,11 @@
     <section class="events" id="programmation" aria-labelledby="events-title">
       <div class="wrap">
         <div class="events-head">
-          <h2 class="events-title" id="events-title">Les événements<br>à venir</h2>
-          <p class="events-desc">Trois rendez-vous pour faire vibrer les voix — concerts, masterclass et rencontres à découvrir cette saison.</p>
+          <h2 class="events-title" id="events-title" data-reveal-title><span>À l'affiche</span></h2>
+          <p class="events-desc" data-reveal style="--reveal-delay:120ms">La programmation ALTO — des créations chorales pensées comme des expériences vivantes, uniques comme les voix qui les portent.</p>
         </div>
 
-        <div class="events-stage">
-          <div class="events-stage-head">
-            <p class="events-stage-lead">La programmation ALTO — des créations chorales pensées comme des expériences vivantes, uniques comme les voix qui les portent.</p>
-            <h3 class="events-stage-title">À l'affiche</h3>
-          </div>
-
+        <div class="events-stage" data-reveal="scale" style="--reveal-delay:80ms">
           <div class="event-fan" role="group" aria-label="Affiches des prochains événements">
             <button class="event-poster" type="button" data-pos="left" aria-label="Événement précédent">
               <span class="event-poster-media"></span>
@@ -392,10 +481,11 @@
     <section class="manifesto" id="manifeste" aria-labelledby="manifesto-title">
       <div class="wrap">
         <div class="manifesto-grid">
+          <h1 data-reveal-title><span>NOS VISIONS : </span></h1>
           <!-- <div><p class="eyebrow">04 / Le mouvement</p><h2 class="section-title" id="manifesto-title">Créer l'espace pour que la voix advienne.</h2></div> -->
         </div>
         <div class="manifesto-cards">
-          <article class="manifesto-card manifesto-card--blue">
+          <article class="manifesto-card manifesto-card--blue" data-reveal="scale" style="--reveal-delay:0ms">
             <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85" alt="Écouter ensemble" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Écouter</h3>
@@ -403,7 +493,7 @@
             </div>
           </article>
 
-          <article class="manifesto-card manifesto-card--gold">
+          <article class="manifesto-card manifesto-card--gold" data-reveal="scale" style="--reveal-delay:120ms">
             <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=85" alt="Rencontrer les artistes" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Rencontrer</h3>
@@ -411,7 +501,7 @@
             </div>
           </article>
 
-          <article class="manifesto-card manifesto-card--white">
+          <article class="manifesto-card manifesto-card--white" data-reveal="scale" style="--reveal-delay:240ms">
             <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=700&q=85" alt="Créer la musique" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Créer</h3>
@@ -419,7 +509,7 @@
             </div>
           </article>
 
-          <article class="manifesto-card manifesto-card--blue">
+          <article class="manifesto-card manifesto-card--blue" data-reveal="scale" style="--reveal-delay:360ms">
             <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=700&q=85" alt="Apprendre ensemble" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Apprendre</h3>
@@ -435,8 +525,8 @@
         <div class="partners-head">
           <div>
             <!-- <p class="eyebrow">03 / Partenaires & soutiens</p> -->
-            <h2 class="section-title" id="partners-title">Nos partenaires</h2>
-            <p class="section-intro">Des partenaires engagés pour faire circuler les voix, les idées et les rencontres.</p>
+            <h2 class="section-title" id="partners-title" data-reveal-title><span>Nos partenaires</span></h2>
+            <p class="section-intro" data-reveal style="--reveal-delay:120ms">Des partenaires engagés pour faire circuler les voix, les idées et les rencontres.</p>
           </div>
           <a class="arrow-link" href="#contact">Devenir partenaire</a>
         </div>
@@ -461,9 +551,9 @@
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-grid">
         <div>
-          <p class="eyebrow">05 / Contact</p>
-          <h2 class="section-title" id="contact-title">Rejoindre le mouvement</h2>
-          <p class="section-intro">Artiste, mécène, partenaire ou spectateur : écrivez-nous et faisons résonner la suite.</p>
+          <p class="eyebrow" data-reveal>05 / Contact</p>
+          <h2 class="section-title" id="contact-title" data-reveal-title><span>Rejoindre le mouvement</span></h2>
+          <p class="section-intro" data-reveal style="--reveal-delay:120ms">Artiste, mécène, partenaire ou spectateur : écrivez-nous et faisons résonner la suite.</p>
           <form class="contact-form" action="#contact" method="post">
             <label>Nom <input type="text" name="nom" autocomplete="name" required></label>
             <label>Email <input type="email" name="email" autocomplete="email" required></label>
@@ -564,6 +654,85 @@
         setTimeout(() => { button.textContent = originalText; }, 2600);
       }
     }));
+
+    /* ==== Scroll reveal & parallax ==== */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Typewriter hero title — mixed typography */
+    const typeTitle = document.querySelector('#hero-title');
+    if (typeTitle) {
+      const target = typeTitle.querySelector('.type-text');
+      // Chaque segment : le texte + la classe de style à appliquer
+      const segments = [
+        { text: "L'", cls: 'w-echo' },
+        { text: 'écho', cls: 'w-echo' },
+        { text: " d'un ", cls: '' },
+        { text: 'RENOUVEAU', cls: 'w-strong' },
+      ];
+      const total = segments.reduce((s, seg) => s + seg.text.length, 0);
+      const charAt = (n) => {
+        // Reconstruit le HTML jusqu'au n-ième caractère en respectant les segments
+        let out = '', count = 0;
+        for (const seg of segments) {
+          if (count >= n) break;
+          const take = Math.min(seg.text.length, n - count);
+          const chunk = seg.text.slice(0, take).replace(/ /g, ' ');
+          out += seg.cls ? `<span class="${seg.cls}">${chunk}</span>` : chunk;
+          count += take;
+        }
+        return out;
+      };
+      if (reduceMotion) {
+        target.innerHTML = charAt(total);
+        typeTitle.classList.add('type-done');
+      } else {
+        let i = 0;
+        const tick = () => {
+          target.innerHTML = charAt(i);
+          if (i < total) {
+            i++;
+            setTimeout(tick, 70 + Math.random() * 60);
+          } else {
+            setTimeout(() => typeTitle.classList.add('type-done'), 900);
+          }
+        };
+        setTimeout(tick, 450);
+      }
+    }
+
+    if (!reduceMotion) {
+      const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-title]');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      revealEls.forEach((el) => io.observe(el));
+
+      const heroBg = document.querySelector('.hero');
+      const heroContent = document.querySelector('.hero-content');
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y < window.innerHeight) {
+            if (heroBg) heroBg.style.setProperty('--hero-shift', `${y * 0.35}px`);
+            if (heroContent) {
+              heroContent.style.transform = `translateY(${y * 0.18}px)`;
+              heroContent.style.opacity = String(Math.max(0, 1 - y / (window.innerHeight * 0.85)));
+            }
+          }
+          ticking = false;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
   </script>
 </body>
 </html>
