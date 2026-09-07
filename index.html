@@ -59,15 +59,19 @@
 
     .hero { position: relative; display: flex; min-height: 680px; align-items: end; overflow: hidden; background: var(--ink-deep); color: var(--white); }
     .hero::before { position: absolute; inset: -3%; background: linear-gradient(90deg, rgba(5,21,35,.86) 0%, rgba(5,21,35,.45) 46%, rgba(5,21,35,.08) 100%), url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=2200&q=85') center/cover; content: ''; transform: rotate(-1.5deg) scale(1.04); }
-    .hero::after { display: none; position: absolute; right: 9%; bottom: 9%; width: 180px; height: 180px; border: 1px solid rgba(229,189,107,.6); border-radius: 50%; content: ''; }
-    .hero-content { position: relative; z-index: 1; width: calc(100% - 16px); margin-left: 16px; padding: 150px 0 74px; }
+    .hero::after { display: none; position: absolute; right: 9%; bottom: 22%; width: 180px; height: 180px; border: 1px solid rgba(229,189,107,.6); border-radius: 50%; content: ''; }
+    .hero-content { position: relative; z-index: 1; width: calc(100% - 16px); margin-left: 16px; padding: 150px 0 120px; }
     .hero h1 { max-width: 900px; margin: 0; font: 500 clamp(5rem, 15vw, 12rem)/.78 var(--serif); letter-spacing: -.08em; }
     .hero-subtitle { margin: 30px 0 8px; color: var(--gold-light); font: italic 500 clamp(1.25rem, 2.6vw, 2rem) var(--serif); }
     .hero-copy { max-width: 355px; margin: 0 0 30px; color: rgba(255,255,255,.8); font-size: 1rem; }
     .hero-actions { display: grid; gap: 12px; }
     .hero-actions .button { width: 50%; min-height: 56px; padding: 10px 12px; text-align: center; }
-    .scroll-note { display: none; position: absolute; right: 0; bottom: 48px; align-items: center; gap: 13px; color: rgba(255,255,255,.65); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
+    .scroll-note { display: none; position: absolute; right: 0; bottom: 100px; align-items: center; gap: 13px; color: rgba(255,255,255,.65); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
     .scroll-note::before { width: 1px; height: 54px; background: var(--gold); content: ''; }
+    .hero-wave { position: absolute; z-index: 2; right: 0; bottom: -1px; left: 0; line-height: 0; pointer-events: none; }
+    .hero-wave svg { display: block; width: 100%; height: clamp(48px, 7vw, 92px); }
+    .hero-wave-back { fill: var(--gold); opacity: .5; }
+    .hero-wave-front { fill: var(--gold); }
 
     .quote-ribbon { width: 100%; overflow: hidden; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-light); }
     .quote-track { width: max-content; transform: rotate(-1.5deg) scale(1.02); }
@@ -85,29 +89,27 @@
     .events .section-intro { color: rgba(255,255,255,.65); }
     .events-head { display: block; gap: 30px; margin-bottom: 55px; }
     .events-head .arrow-link { margin-top: 20px; }
-    .event-carousel { display: flex; gap: 16px; max-width: 100%; overflow-x: auto; padding-bottom: 4px; scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; }
+    .event-carousel { display: flex; gap: 16px; max-width: 100%; overflow-x: auto; padding: 8px 0 18px; scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; perspective: 1200px; }
     .event-carousel::-webkit-scrollbar { display: none; }
     .event-carousel .event-feature { flex: 0 0 100%; scroll-snap-align: start; }
     .event-progress { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
     .event-progress button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer; transition: background .2s ease, transform .2s ease; }
     .event-progress button[aria-current="true"] { background: var(--gold-light); transform: scale(1.35); }
     .events-head .arrow-link { color: var(--white); }
-    .event-feature { display: grid; grid-template-columns: 1fr; min-height: 430px; background: var(--paper-light); color: var(--ink); }
-    .event-image { min-height: 280px; background: url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1300&q=85') center/cover; }
+    .event-feature { position: relative; display: grid; grid-template-columns: 1fr; min-height: 530px; background: var(--paper-light); color: var(--ink); transform-origin: center right; }
+    .event-feature.is-turning { animation: event-page-turn .65s cubic-bezier(.22,.61,.36,1); }
+    .event-image { min-height: 270px; aspect-ratio: 16 / 10; background: url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1300&q=85') center/cover; }
     .event-image--workshop { background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1300&q=85'); }
     .event-image--meeting { background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1300&q=85'); }
-    .event-detail { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 60px); }
+    .event-detail { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; margin: -18px 14px 0; padding: 32px 24px 28px; background: var(--paper-light); box-shadow: 0 14px 28px rgba(9,29,49,.12); }
+    .event-detail::before { position: absolute; top: 10px; left: 50%; width: 15px; height: 15px; border: 2px solid var(--gold); border-radius: 50%; background: var(--ink-deep); box-shadow: 0 3px 0 rgba(9,29,49,.2); content: ''; transform: translateX(-50%); }
+    .event-detail::after { position: absolute; top: 16px; left: 50%; width: 38px; height: 1px; background: rgba(16,44,73,.22); content: ''; transform: translateX(-50%); }
     .badge { display: inline-flex; align-self: start; padding: 7px 10px; background: var(--ink); color: var(--white); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
     .event-date { margin: 26px 0 8px; color: var(--gold); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .event-title { margin: 0; font: 500 clamp(2rem, 4vw, 3.5rem)/1.02 var(--serif); }
     .event-place { margin: 18px 0 0; color: rgba(16,44,73,.7); }
     .event-detail .button { align-self: start; margin-top: 30px; }
-    .event-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 1px; background: rgba(255,255,255,.2); }
-    .event-small { padding: 28px 24px; background: var(--ink); }
-    .event-small time { color: var(--gold-light); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .event-small h3 { margin: 12px 0 0; font: 500 1.35rem/1.15 var(--serif); }
-    .event-small p { margin: 12px 0 0; color: rgba(255,255,255,.6); font-size: .82rem; }
-
+    @keyframes event-page-turn { 0% { opacity: 1; transform: rotateY(0) translateX(0); } 45% { opacity: .45; transform: rotateY(-8deg) translateX(-18px); } 100% { opacity: 1; transform: rotateY(0) translateX(0); } }
     .choir-ribbon { position: relative; z-index: 1; overflow: visible; padding: 0; background: transparent; }
     .choir-track { display: flex; width: max-content; animation: choir-scroll 42s linear infinite; }
     .choir-set { display: flex; gap: 0; padding-right: 0; }
@@ -120,44 +122,39 @@
     .partners-head { display: block; gap: 30px; margin-bottom: 48px; }
     .partners-head .arrow-link { margin-top: 20px; }
     .partners-head .section-intro { margin-top: 16px; }
-    .partner-ribbon { display: grid; gap: 16px; width: 100%; margin-top: 48px; overflow: hidden; }
+    .partner-ribbon { display: flex; width: 100%; margin-top: 48px; overflow: hidden; }
     .partner-line { display: flex; width: max-content; animation: partner-scroll 34s linear infinite; }
-    .partner-line--reverse { animation-name: partner-scroll-reverse; animation-duration: 38s; }
     .partner-set { display: flex; gap: 12px; padding-right: 12px; }
     .partner-card { display: block; width: clamp(110px, 38vw, 150px); aspect-ratio: 1; flex: 0 0 auto; overflow: hidden; background: var(--white); }
     .partner-card img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
     .partners:hover .partner-line { animation-play-state: paused; }
     @keyframes partner-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @keyframes partner-scroll-reverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
     .manifesto { background: var(--paper); color: var(--ink); }
     .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
     .manifesto .section-title { font-size: clamp(2rem, 4vw, 3.7rem); }
 
-    .manifesto-cards { display: grid; grid-template-columns: 1fr; gap: 24px; }
-    .manifesto-card { display: flex; flex-direction: column; background: #e8e3db; color: var(--ink); transition: transform .2s ease; }
-    .manifesto-card:hover { transform: translateY(-4px); }
-    .manifesto-card--blue { background: #1a2d5c; color: var(--white); }
-    .manifesto-card:nth-child(odd) { flex-direction: column-reverse; }
+    .manifesto-cards { display: grid; grid-template-columns: 1fr; gap: 22px; }
+    .manifesto-card { --card-bg: var(--white); display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; text-align: center; background: var(--card-bg); color: var(--ink); transition: transform .25s ease, box-shadow .25s ease; }
+    .manifesto-card:hover { transform: translateY(-6px); box-shadow: 0 20px 42px rgba(9,29,49,.16); }
+    .manifesto-card--blue { --card-bg: var(--ink-deep); color: var(--white); }
+    .manifesto-card--gold { --card-bg: var(--gold); color: var(--ink-deep); }
+    .manifesto-card--white { --card-bg: var(--white); color: var(--ink); box-shadow: 0 10px 30px rgba(9,29,49,.08); }
 
-    .manifesto-card-image { width: calc(100% - 20px); aspect-ratio: 4/3; margin: 10px; background: #d0c5ba; overflow: hidden; }
-    .manifesto-card-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.6); transition: filter .4s ease, transform .4s ease; }
-    .manifesto-card:hover .manifesto-card-image img { filter: saturate(.85); transform: scale(1.03); }
+    .manifesto-card-image { position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; background: #d0c5ba; }
+    .manifesto-card-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter .4s ease, transform .5s ease; }
+    .manifesto-card:hover .manifesto-card-image img { filter: saturate(1); transform: scale(1.05); }
+    .manifesto-card-wave { position: absolute; right: 0; bottom: -1px; left: 0; display: block; width: 100%; height: 34px; }
+    .manifesto-card-wave path { fill: var(--card-bg); }
 
-    .manifesto-card-content { padding: 36px 28px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1; position: relative; }
-    .manifesto-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-    .manifesto-card-number { flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--gold); color: var(--ink-deep); border-radius: 50%; font: 700 1.3rem var(--mono); letter-spacing: .04em; }
-
-    .manifesto-card-title { margin: 0; font: 700 1.5rem var(--sans); letter-spacing: .08em; text-transform: uppercase; line-height: 1.1; color: var(--ink); flex-grow: 1; }
-    .manifesto-card--blue .manifesto-card-title { color: var(--gold); }
-
-    .manifesto-card-text { margin: 0; font-size: .92rem; line-height: 1.65; color: rgba(16,44,73,.75); }
-    .manifesto-card--blue .manifesto-card-text { color: rgba(255,255,255,.8); }
+    .manifesto-card-content { display: flex; flex-direction: column; gap: 14px; width: 100%; padding: 12px 26px 38px; }
+    .manifesto-card-title { margin: 0; font: 700 1.4rem var(--sans); letter-spacing: .1em; text-transform: uppercase; line-height: 1.12; color: inherit; }
+    .manifesto-card--blue .manifesto-card-title { color: var(--gold-light); }
+    .manifesto-card-text { margin: 0; font-size: .92rem; line-height: 1.65; color: inherit; opacity: .82; }
 
     @media (min-width: 520px) {
       .manifesto-cards { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-      .manifesto-card-content { padding: 28px 20px; }
       .manifesto-card-title { font-size: 1.25rem; }
       .partner-set { gap: 18px; padding-right: 18px; }
       .partner-card { width: 28vw; }
@@ -170,10 +167,9 @@
       .partner-card { width: 10cm; }
       .partner-card img { padding: 24px; }
       .manifesto-cards { grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: stretch; }
-      .manifesto-card-content { padding: 28px 20px; }
-      .manifesto-card-image { aspect-ratio: 1; }
+      .manifesto-card-content { padding: 8px 20px 32px; }
+      .manifesto-card-image { aspect-ratio: 4 / 3; }
       .manifesto-card-title { font-size: 1.2rem; }
-      .manifesto-card-number { width: 48px; height: 48px; font-size: 1.1rem; }
     }
 
     .contact { background: var(--paper-light); }
@@ -223,7 +219,7 @@
       .nav-action { display: inline-flex; }
       .menu-toggle { display: none; }
       .hero { min-height: 720px; }
-      .hero-content { width: 100%; margin-left: 0; padding-bottom: 105px; }
+      .hero-content { width: 100%; margin-left: 0; padding-bottom: 150px; }
       .hero::after { display: block; }
       .scroll-note { display: flex; }
       .hero-actions { display: flex; flex-wrap: wrap; }
@@ -234,9 +230,9 @@
       .positioning-secondary { grid-column: 1; grid-row: 2; padding-top: 28px; }
       .events-head, .partners-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
       .events-head .arrow-link, .partners-head .arrow-link { margin-top: 30px; }
-      .event-feature { grid-template-columns: 1.2fr 1fr; }
-      .event-image { min-height: 300px; }
-      .event-grid { grid-template-columns: repeat(3, 1fr); }
+      .event-feature { grid-template-columns: 1.18fr .82fr; min-height: 430px; align-items: center; background: transparent; }
+      .event-image { min-height: 0; aspect-ratio: 16 / 10; }
+      .event-detail { margin: 0 0 0 -42px; padding: 48px 42px 42px; }
       .manifesto-grid { grid-template-columns: .8fr 1.5fr; gap: 80px; }
       .pillars { grid-template-columns: repeat(4, 1fr); margin-top: 75px; }
       .pillar:nth-child(2) { border-right: 1px solid rgba(9,29,49,.25); }
@@ -276,6 +272,12 @@
         </div>
       </div>
       <span class="scroll-note">Faire vibrer les voix</span>
+      <div class="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path class="hero-wave-back" d="M0,60 C240,120 420,20 720,56 C1000,92 1200,26 1440,64 L1440,120 L0,120 Z"/>
+          <path class="hero-wave-front" d="M0,84 C260,44 520,104 780,80 C1040,58 1260,98 1440,76 L1440,120 L0,120 Z"/>
+        </svg>
+      </div>
     </section>
 
     <div class="quote-ribbon" role="note" aria-label="Citation ALTO">
@@ -353,11 +355,6 @@
           <button type="button" aria-label="Afficher le deuxième événement" aria-current="false"></button>
           <button type="button" aria-label="Afficher le troisième événement" aria-current="false"></button>
         </div>
-        <div class="event-grid">
-          <article class="event-small"><time datetime="2026-10-22">22.10.26</time><h3>Atelier : écouter autrement</h3><p>Masterclass · Avec le choeur ALTO</p></article>
-          <article class="event-small"><time datetime="2026-11-07">07.11.26</time><h3>Rencontre avec les voix</h3><p>Rencontre · Entrée libre</p></article>
-          <article class="event-small"><time datetime="2026-11-28">28.11.26</time><h3>Fragments de lumière</h3><p>Concert · Billetterie bientôt ouverte</p></article>
-        </div>
       </div>
     </section>
 
@@ -387,32 +384,32 @@
           <!-- <div><p class="eyebrow">04 / Le mouvement</p><h2 class="section-title" id="manifesto-title">Créer l'espace pour que la voix advienne.</h2></div> -->
         </div>
         <div class="manifesto-cards">
-          <article class="manifesto-card">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85" alt="Écouter ensemble" loading="lazy"></div>
+          <article class="manifesto-card manifesto-card--blue">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85" alt="Écouter ensemble" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Écouter</h3>
               <p class="manifesto-card-text">Créer un espace d'accueil et de reconnaissance pour chaque voix, chaque histoire, chaque perspective unique.</p>
             </div>
           </article>
 
-          <article class="manifesto-card manifesto-card--blue">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=85" alt="Rencontrer les artistes" loading="lazy"></div>
+          <article class="manifesto-card manifesto-card--gold">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=85" alt="Rencontrer les artistes" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Rencontrer</h3>
               <p class="manifesto-card-text">Favoriser les rencontres authentiques qui déplacent les lignes et créent des connexions durables.</p>
             </div>
           </article>
 
-          <article class="manifesto-card">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=700&q=85" alt="Créer la musique" loading="lazy"></div>
+          <article class="manifesto-card manifesto-card--white">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=700&q=85" alt="Créer la musique" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Créer</h3>
               <p class="manifesto-card-text">Donner naissance à une musique nouvelle, portée par la puissance du collectif et l'audace.</p>
             </div>
           </article>
 
-          <article class="manifesto-card">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=700&q=85" alt="Apprendre ensemble" loading="lazy"></div>
+          <article class="manifesto-card manifesto-card--blue">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=700&q=85" alt="Apprendre ensemble" loading="lazy"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
             <div class="manifesto-card-content">
               <h3 class="manifesto-card-title">Apprendre</h3>
               <p class="manifesto-card-text">Transmettre les savoirs et les techniques pour permettre à chacun de se réinventer et d'évoluer.</p>
@@ -446,20 +443,6 @@
             <div class="partner-card"><img src="partenaires/Axian%20Group%20UAE%20Logo%20PNG%20Vector%20(PDF)%20Free%20Download.jpeg" alt="" loading="lazy"></div>
             <div class="partner-card"><img src="partenaires/totl.jpeg" alt="" loading="lazy"></div>
             <div class="partner-card"><img src="partenaires/yas.png" alt="" loading="lazy"></div>
-          </div>
-        </div>
-        <div class="partner-line partner-line--reverse">
-          <div class="partner-set">
-            <div class="partner-card"><img src="partenaires/yas.png" alt="Logo Yas" loading="lazy"></div>
-            <div class="partner-card"><img src="partenaires/totl.jpeg" alt="Logo TOTL" loading="lazy"></div>
-            <div class="partner-card"><img src="partenaires/Axian%20Group%20UAE%20Logo%20PNG%20Vector%20(PDF)%20Free%20Download.jpeg" alt="Logo Axian Group UAE" loading="lazy"></div>
-            <div class="partner-card"><img src="partenaires/AMI.png" alt="Logo AMI" loading="lazy"></div>
-          </div>
-          <div class="partner-set" aria-hidden="true">
-            <div class="partner-card"><img src="partenaires/yas.png" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="partenaires/totl.jpeg" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="partenaires/Axian%20Group%20UAE%20Logo%20PNG%20Vector%20(PDF)%20Free%20Download.jpeg" alt="" loading="lazy"></div>
-            <div class="partner-card"><img src="partenaires/AMI.png" alt="" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -538,9 +521,16 @@
       clearInterval(eventTimer);
       eventTimer = undefined;
     };
+    const turnEventPage = () => {
+      const activeEvent = eventCarousel.querySelector('.event-feature');
+      activeEvent.classList.remove('is-turning');
+      void activeEvent.offsetWidth;
+      activeEvent.classList.add('is-turning');
+    };
     const advanceEvents = () => {
       const step = eventCarousel.clientWidth + 16;
       const isLastEvent = eventCarousel.scrollLeft + eventCarousel.clientWidth >= eventCarousel.scrollWidth - 4;
+      turnEventPage();
       eventCarousel.scrollTo({ left: isLastEvent ? 0 : eventCarousel.scrollLeft + step, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     };
     const startEventAutoplay = () => {
@@ -555,6 +545,7 @@
     eventCarousel.addEventListener('scroll', updateEventProgress, { passive: true });
     eventProgress.forEach((dot, index) => dot.addEventListener('click', () => {
       stopEventAutoplay();
+      turnEventPage();
       eventCarousel.scrollTo({ left: index * (eventCarousel.clientWidth + 16), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
       if (eventIsVisible) startEventAutoplay();
     }));
