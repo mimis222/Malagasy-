@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ALTO - L'écho d'un renouveau lyrique.">
+  <link rel="icon" href="04_favicon_ALTO_512x512.png" type="image/png">
+  <title>ALTO — L'écho d'un renouveau</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
+
+    :root {
+      --ink: #102c49;
+      --ink-deep: #091d31;
+      --gold: #c38a2e;
+      --gold-light: #e5bd6b;
+      --paper: #f5f1e9;
+      --paper-light: #fbfaf7;
+      --line: rgba(16, 44, 73, .18);
+      --white: #fffdf8;
+      --sans: 'Manrope', sans-serif;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { overflow-x: hidden; scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { width: 100%; margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.55; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(100% - 32px, 600px); margin-inline: auto; }
+    .eyebrow { margin: 0 0 16px; color: var(--gold); font: 500 .68rem/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .section-title { max-width: 680px; margin: 0; font: 500 clamp(2.25rem, 5vw, 4.5rem)/.98 var(--serif); letter-spacing: -.04em; }
+    .section-intro { max-width: 480px; margin: 22px 0 0; color: rgba(16, 44, 73, .74); font-size: 1rem; }
+    .arrow-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; color: var(--ink); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .arrow-link::after { content: '↗'; color: var(--gold); font-size: 1.2rem; transition: transform .2s ease; }
+    .arrow-link:hover::after { transform: translate(3px, -3px); }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; transition: background .2s ease, color .2s ease, transform .2s ease; }
+    .button:hover { background: var(--ink-deep); transform: translateY(-2px); }
+    .hero .button:not(.button--ghost) { border-color: var(--gold); background: var(--gold); color: var(--ink-deep); }
+    .hero .button:not(.button--ghost):hover { background: var(--gold-light); }
+    .button--ghost { border-color: rgba(255,255,255,.55); background: transparent; color: var(--white); }
+    .button--ghost:hover { background: var(--white); color: var(--ink); }
+
+    .site-header { position: fixed; z-index: 100; top: 0; right: 0; left: 0; width: 100%; background: var(--ink-deep); box-shadow: 0 8px 24px rgba(9,29,49,.18); color: var(--white); }
+    .nav { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 72px; border-bottom: 1px solid rgba(255,255,255,.2); }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 1rem; font-weight: 700; letter-spacing: .28em; }
+    .brand img { width: 42px; height: 42px; object-fit: contain; filter: brightness(0) invert(1); }
+    .nav-links { position: absolute; z-index: 101; top: 72px; right: 0; left: 0; display: none; padding: 24px 16px; background: var(--ink-deep); flex-direction: column; align-items: start; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links.is-open { display: flex; }
+    .nav-links a { opacity: .8; transition: opacity .2s ease; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-action { display: none; padding: 12px 15px; border: 1px solid rgba(255,255,255,.55); font-size: .65rem; font-weight: 700; letter-spacing: .1em; }
+    .menu-toggle { display: block; border: 0; background: none; color: inherit; font-size: 1.5rem; }
+    .menu-toggle:focus-visible, .nav-links a:focus-visible, .brand:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 5px; }
+    section, .quote-ribbon, footer { scroll-margin-top: 72px; }
+
+    .hero { position: relative; display: flex; min-height: 680px; align-items: end; overflow: hidden; background: var(--ink-deep); color: var(--white); }
+    .hero::before { position: absolute; inset: -3%; background: linear-gradient(90deg, rgba(5,21,35,.86) 0%, rgba(5,21,35,.45) 46%, rgba(5,21,35,.08) 100%), url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=2200&q=85') center/cover; content: ''; transform: rotate(-1.5deg) scale(1.04); }
+    .hero::after { display: none; position: absolute; right: 9%; bottom: 9%; width: 180px; height: 180px; border: 1px solid rgba(229,189,107,.6); border-radius: 50%; content: ''; }
+    .hero-content { position: relative; z-index: 1; width: calc(100% - 16px); margin-left: 16px; padding: 150px 0 74px; }
+    .hero h1 { max-width: 900px; margin: 0; font: 500 clamp(5rem, 15vw, 12rem)/.78 var(--serif); letter-spacing: -.08em; }
+    .hero-subtitle { margin: 30px 0 8px; color: var(--gold-light); font: italic 500 clamp(1.25rem, 2.6vw, 2rem) var(--serif); }
+    .hero-copy { max-width: 355px; margin: 0 0 30px; color: rgba(255,255,255,.8); font-size: 1rem; }
+    .hero-actions { display: grid; gap: 12px; }
+    .hero-actions .button { width: 50%; min-height: 56px; padding: 10px 12px; text-align: center; }
+    .scroll-note { display: none; position: absolute; right: 0; bottom: 48px; align-items: center; gap: 13px; color: rgba(255,255,255,.65); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
+    .scroll-note::before { width: 1px; height: 54px; background: var(--gold); content: ''; }
+
+    .quote-ribbon { width: 100%; overflow: hidden; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-light); }
+    .quote-track { width: max-content; transform: rotate(-1.5deg) scale(1.02); }
+    .quote-run { display: flex; width: max-content; animation: quote-scroll 30s linear infinite; }
+    .quote-ribbon p { margin: 0; padding: 0 34px; color: var(--ink); font: italic 500 clamp(1.45rem, 3vw, 2.5rem)/1.1 var(--serif); white-space: nowrap; }
+    @keyframes quote-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    section { padding: 80px 0; }
+    .positioning { background: var(--paper-light); }
+    .positioning-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    .positioning-main, .positioning-secondary { min-width: 0; }
+    .positioning-secondary { padding-top: 28px; border-top: 1px solid var(--line); }
+
+    .events { background: var(--ink); color: var(--white); }
+    .events .section-intro { color: rgba(255,255,255,.65); }
+    .events-head { display: block; gap: 30px; margin-bottom: 55px; }
+    .events-head .arrow-link { margin-top: 20px; }
+    .event-carousel { display: flex; gap: 16px; max-width: 100%; overflow-x: auto; padding-bottom: 4px; scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; }
+    .event-carousel::-webkit-scrollbar { display: none; }
+    .event-carousel .event-feature { flex: 0 0 100%; scroll-snap-align: start; }
+    .event-progress { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
+    .event-progress button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer; transition: background .2s ease, transform .2s ease; }
+    .event-progress button[aria-current="true"] { background: var(--gold-light); transform: scale(1.35); }
+    .events-head .arrow-link { color: var(--white); }
+    .event-feature { display: grid; grid-template-columns: 1fr; min-height: 430px; background: var(--paper-light); color: var(--ink); }
+    .event-image { min-height: 280px; background: url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1300&q=85') center/cover; }
+    .event-image--workshop { background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1300&q=85'); }
+    .event-image--meeting { background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1300&q=85'); }
+    .event-detail { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 5vw, 60px); }
+    .badge { display: inline-flex; align-self: start; padding: 7px 10px; background: var(--ink); color: var(--white); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .event-date { margin: 26px 0 8px; color: var(--gold); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .event-title { margin: 0; font: 500 clamp(2rem, 4vw, 3.5rem)/1.02 var(--serif); }
+    .event-place { margin: 18px 0 0; color: rgba(16,44,73,.7); }
+    .event-detail .button { align-self: start; margin-top: 30px; }
+    .event-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 1px; background: rgba(255,255,255,.2); }
+    .event-small { padding: 28px 24px; background: var(--ink); }
+    .event-small time { color: var(--gold-light); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .event-small h3 { margin: 12px 0 0; font: 500 1.35rem/1.15 var(--serif); }
+    .event-small p { margin: 12px 0 0; color: rgba(255,255,255,.6); font-size: .82rem; }
+
+    .artists { background: var(--paper); }
+    .artists-head { display: block; gap: 30px; margin-bottom: 50px; }
+    .artists-head .arrow-link { margin-top: 20px; }
+    .artist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px 14px; }
+    .artist-card:nth-child(2), .artist-card:nth-child(4) { transform: none; }
+    .artist-photo { aspect-ratio: 3 / 4; overflow: hidden; background: #d9d0c2; }
+    .artist-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.65); transition: transform .5s ease, filter .5s ease; }
+    .artist-card:hover img { transform: scale(1.04); filter: saturate(1); }
+    .artist-name { margin: 15px 0 2px; font: 500 1.28rem var(--serif); }
+    .artist-role { margin: 0; color: var(--gold); font: 500 .66rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    .choir-ribbon { position: relative; z-index: 1; overflow: visible; padding: 0; background: transparent; }
+    .choir-track { display: flex; width: max-content; animation: choir-scroll 42s linear infinite; }
+    .choir-set { display: flex; gap: 0; padding-right: 0; }
+    .choir-photo { width: clamp(190px, 44vw, 360px); aspect-ratio: 1.45 / 1; overflow: hidden; margin: 0; border: 0; background: transparent; }
+    .choir-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter .3s ease, transform .5s ease; }
+    .choir-photo:hover img { filter: saturate(1); transform: scale(1.04); }
+    @keyframes choir-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .partners { overflow: hidden; padding: 100px 0 110px; background: var(--paper-light); }
+    .partners-head { display: block; gap: 30px; margin-bottom: 48px; }
+    .partners-head .arrow-link { margin-top: 20px; }
+    .partners-head .section-intro { margin-top: 16px; }
+    .partner-ribbon { display: grid; gap: 12px; width: 100%; overflow: hidden; }
+    .partner-track { display: flex; width: max-content; animation: partner-scroll 34s linear infinite; }
+    .partner-track--reverse { animation-name: partner-scroll-reverse; animation-duration: 38s; }
+    .partner-ribbon:hover .partner-track { animation-play-state: paused; }
+    .partner-set { display: flex; gap: 12px; padding-right: 12px; }
+    .partner-card { display: flex; align-items: center; justify-content: center; min-width: clamp(190px, 23vw, 270px); height: 72px; padding: 12px 28px; color: var(--ink); }
+    .partner-card span { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 12px; font: 500 1.25rem var(--serif); white-space: nowrap; }
+    .partner-card span::before { display: grid; width: 30px; height: 30px; place-items: center; color: var(--gold); content: attr(data-mark); font: 700 .7rem var(--sans); letter-spacing: .04em; }
+    @keyframes partner-scroll { from { transform: translateX(-25%); } to { transform: translateX(0); } }
+    @keyframes partner-scroll-reverse { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    .manifesto { background: var(--paper); color: var(--ink); }
+    .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
+    .manifesto .section-title { font-size: clamp(2rem, 4vw, 3.7rem); }
+
+    .manifesto-cards { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    .manifesto-card { display: flex; flex-direction: column; background: #e8e3db; color: var(--ink); transition: transform .2s ease; }
+    .manifesto-card:hover { transform: translateY(-4px); }
+    .manifesto-card--blue { background: #1a2d5c; color: var(--white); }
+    .manifesto-card:nth-child(odd) { flex-direction: column-reverse; }
+
+    .manifesto-card-image { width: calc(100% - 20px); aspect-ratio: 4/3; margin: 10px; background: #d0c5ba; overflow: hidden; }
+    .manifesto-card-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.6); transition: filter .4s ease, transform .4s ease; }
+    .manifesto-card:hover .manifesto-card-image img { filter: saturate(.85); transform: scale(1.03); }
+
+    .manifesto-card-content { padding: 36px 28px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1; position: relative; }
+    .manifesto-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .manifesto-card-number { flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--gold); color: var(--ink-deep); border-radius: 50%; font: 700 1.3rem var(--mono); letter-spacing: .04em; }
+
+    .manifesto-card-title { margin: 0; font: 700 1.5rem var(--sans); letter-spacing: .08em; text-transform: uppercase; line-height: 1.1; color: var(--ink); flex-grow: 1; }
+    .manifesto-card--blue .manifesto-card-title { color: var(--gold); }
+
+    .manifesto-card-text { margin: 0; font-size: .92rem; line-height: 1.65; color: rgba(16,44,73,.75); }
+    .manifesto-card--blue .manifesto-card-text { color: rgba(255,255,255,.8); }
+
+    @media (min-width: 520px) {
+      .manifesto-cards { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .manifesto-card-content { padding: 28px 20px; }
+      .manifesto-card-title { font-size: 1.25rem; }
+    }
+
+    @media (min-width: 801px) {
+      .manifesto-cards { grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: stretch; }
+      .manifesto-card-content { padding: 28px 20px; }
+      .manifesto-card-image { aspect-ratio: 1; }
+      .manifesto-card-title { font-size: 1.2rem; }
+      .manifesto-card-number { width: 48px; height: 48px; font-size: 1.1rem; }
+    }
+
+    .contact { background: var(--paper-light); }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    .contact-form { display: grid; gap: 16px; margin-top: 12px; }
+    label { display: grid; gap: 7px; color: var(--ink); font: 500 .66rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    input, select, textarea { width: 100%; padding: 14px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; outline: 0; background: transparent; color: var(--ink); }
+    textarea { min-height: 100px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    .contact-form .button { justify-self: start; margin-top: 10px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .contact-social { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 14px; border: 1px solid var(--line); color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: border-color .2s ease, color .2s ease, transform .2s ease; }
+    .contact-social:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .contact-social svg { width: 19px; height: 19px; fill: currentColor; }
+    .contact-social--phone svg { fill: none; stroke: currentColor; stroke-width: 1.8; }
+    .contact-gallery { display: grid; grid-template-columns: .82fr 1fr .82fr; align-items: center; gap: 8px; }
+    .contact-gallery figure { min-width: 0; aspect-ratio: 3 / 4; overflow: hidden; margin: 0; background: #d9d0c2; }
+    .contact-gallery figure:nth-child(2) { aspect-ratio: 3 / 5; }
+    .contact-gallery img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter .3s ease, transform .5s ease; }
+    .contact-gallery figure:hover img { filter: saturate(1); transform: scale(1.04); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .partner-track, .choir-track, .quote-run { animation: none; }
+      .event-carousel { scroll-behavior: auto; }
+    }
+
+    footer { padding: 70px 0 25px; background: var(--ink-deep); color: var(--white); }
+    .footer-top { display: grid; grid-template-columns: 1fr; gap: 35px; padding-bottom: 45px; }
+    .footer-brand { display: flex; align-items: center; gap: 15px; font: 500 2rem var(--serif); }
+    .footer-brand img { width: 58px; height: 58px; object-fit: contain; filter: brightness(0) invert(1); }
+    .footer-tagline { margin: 22px 0 0; color: rgba(255,255,255,.6); font: italic 1rem var(--serif); }
+    .footer-heading { margin: 0 0 18px; color: var(--gold-light); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .footer-links { display: grid; gap: 8px; color: rgba(255,255,255,.72); font-size: .85rem; }
+    .newsletter { display: flex; border-bottom: 1px solid rgba(255,255,255,.35); }
+    .newsletter input { border: 0; color: var(--white); }
+    .newsletter button { border: 0; background: none; color: var(--gold-light); cursor: pointer; font-size: 1.2rem; }
+    .footer-bottom { display: grid; gap: 8px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.42); font-size: .65rem; }
+
+    @media (min-width: 801px) {
+      .wrap { width: min(1180px, calc(100% - 48px)); }
+      html { scroll-padding-top: 90px; }
+      section, .quote-ribbon, footer { scroll-margin-top: 90px; }
+      .nav { min-height: 90px; }
+      .nav-links { position: static; display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); padding: 0; background: none; flex-direction: row; }
+      .nav-links.is-open { display: flex; }
+      .nav-action { display: inline-flex; }
+      .menu-toggle { display: none; }
+      .hero { min-height: 720px; }
+      .hero-content { width: 100%; margin-left: 0; padding-bottom: 105px; }
+      .hero::after { display: block; }
+      .scroll-note { display: flex; }
+      .hero-actions { display: flex; flex-wrap: wrap; }
+      .hero-actions .button { width: auto; }
+      section { padding: 120px 0; }
+      .positioning-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 80px; align-items: start; }
+      .positioning-main { grid-column: 2; grid-row: 1; }
+      .positioning-secondary { grid-column: 1; grid-row: 2; padding-top: 28px; }
+      .events-head, .artists-head, .partners-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+      .events-head .arrow-link, .artists-head .arrow-link, .partners-head .arrow-link { margin-top: 30px; }
+      .event-feature { grid-template-columns: 1.2fr 1fr; }
+      .event-image { min-height: 300px; }
+      .event-grid { grid-template-columns: repeat(3, 1fr); }
+      .artist-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+      .artist-card:nth-child(2), .artist-card:nth-child(4) { transform: translateY(32px); }
+      .manifesto-grid { grid-template-columns: .8fr 1.5fr; gap: 80px; }
+      .pillars { grid-template-columns: repeat(4, 1fr); margin-top: 75px; }
+      .pillar:nth-child(2) { border-right: 1px solid rgba(9,29,49,.25); }
+      .pillar:nth-child(3), .pillar:nth-child(4) { border-top: 0; }
+      .pillar:nth-child(3) { padding-left: 20px; }
+      .contact-grid { grid-template-columns: 1fr 1fr; gap: 100px; }
+      .footer-top { grid-template-columns: 1.4fr 1fr 1fr; gap: 50px; padding-bottom: 70px; }
+      .footer-bottom { display: flex; justify-content: space-between; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Navigation principale">
+      <a class="brand" href="#accueil" aria-label="ALTO, accueil"><img src="01_logo_ALTO_principal_vertical_4000px.png" alt="">ALTO</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Ouvrir le menu">☰</button>
+      <div class="nav-links" id="main-menu">
+        <a href="#programmation">Évenements</a>
+        <a href="#artistes">Artistes</a>
+        <a href="#partenaires">Partenaires</a>
+        <a href="#vision">À propos</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-action" href="#programmation">Prochain événement</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil" aria-labelledby="hero-title">
+      <div class="wrap hero-content">
+        <p class="eyebrow">Scène lyrique & chorale</p>
+        <h1 id="hero-title">ALTO</h1>
+        <p class="hero-subtitle">L'écho d'un renouveau.</p>
+        <p class="hero-copy">La scène lyrique et chorale entre dans une nouvelle ère.</p>
+        <div class="hero-actions">
+          <a class="button" href="#vision">Découvrir le mouvement</a>
+          <a class="button button--ghost" href="#programmation">Voir la programmation</a>
+        </div>
+      </div>
+      <span class="scroll-note">Faire vibrer les voix</span>
+    </section>
+
+    <div class="quote-ribbon" role="note" aria-label="Citation ALTO">
+      <div class="quote-track">
+        <div class="quote-run">
+          <p>« Lorsque les voix se rencontrent, un espace nouveau apparaît. »</p>
+          <p aria-hidden="true">« Lorsque les voix se rencontrent, un espace nouveau apparaît. »</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="positioning" id="vision" aria-labelledby="positioning-title">
+      <div class="wrap positioning-grid">
+        <div class="positioning-main">
+          <p class="eyebrow">01 / Le positionnement</p>
+          <h2 class="section-title" id="positioning-title">L'écho d'un renouveau</h2>
+          <p class="section-intro">ALTO accompagne la renaissance lyrique avec une conviction simple : lorsque les voix se rencontrent, elles ouvrent un espace nouveau.</p>
+        </div>
+        <div class="positioning-secondary">
+          <p class="section-intro">Un mouvement vivant, exigeant et généreux, porté par la puissance du collectif.</p>
+          <a class="arrow-link" href="#manifeste">En savoir plus sur notre vision</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="events" id="programmation" aria-labelledby="events-title">
+      <div class="wrap">
+        <div class="events-head">
+          <div>
+            <p class="eyebrow">02 / À l'affiche</p>
+            <h2 class="section-title" id="events-title">Les événements à venir</h2>
+          </div>
+          <!-- <a class="arrow-link" href="#contact">Toute la programmation</a> -->
+        </div>
+        <div class="event-carousel" tabindex="0" aria-label="Affiches des prochains événements">
+          <article class="event-feature">
+            <div class="event-image" role="img" aria-label="Musiciens réunis autour d'un piano"></div>
+            <div class="event-detail">
+              <div>
+                <span class="badge">Concert</span>
+                <p class="event-date">14 octobre 2026 · 20h00</p>
+                <h3 class="event-title">Le souffle<br>des voix</h3>
+                <p class="event-place">Une création chorale en mouvement</p>
+              </div>
+              <a class="button" href="#contact">Réserver / découvrir</a>
+            </div>
+          </article>
+          <article class="event-feature">
+            <div class="event-image event-image--workshop" role="img" aria-label="Choeur réuni pour une représentation"></div>
+            <div class="event-detail">
+              <div>
+                <span class="badge">Masterclass</span>
+                <p class="event-date">22 octobre 2026 · 14h00</p>
+                <h3 class="event-title">Écouter<br>autrement</h3>
+                <p class="event-place">Un atelier pour ouvrir l'oreille et la voix</p>
+              </div>
+              <a class="button" href="#contact">Découvrir</a>
+            </div>
+          </article>
+          <article class="event-feature">
+            <div class="event-image event-image--meeting" role="img" aria-label="Chanteurs sur une scène éclairée"></div>
+            <div class="event-detail">
+              <div>
+                <span class="badge">Rencontre</span>
+                <p class="event-date">07 novembre 2026 · 18h30</p>
+                <h3 class="event-title">Rencontre<br>avec les voix</h3>
+                <p class="event-place">Une conversation ouverte avec les artistes ALTO</p>
+              </div>
+              <a class="button" href="#contact">Réserver / découvrir</a>
+            </div>
+          </article>
+        </div>
+        <div class="event-progress" aria-label="Progression des événements">
+          <button type="button" aria-label="Afficher le premier événement" aria-current="true"></button>
+          <button type="button" aria-label="Afficher le deuxième événement" aria-current="false"></button>
+          <button type="button" aria-label="Afficher le troisième événement" aria-current="false"></button>
+        </div>
+        <div class="event-grid">
+          <article class="event-small"><time datetime="2026-10-22">22.10.26</time><h3>Atelier : écouter autrement</h3><p>Masterclass · Avec le choeur ALTO</p></article>
+          <article class="event-small"><time datetime="2026-11-07">07.11.26</time><h3>Rencontre avec les voix</h3><p>Rencontre · Entrée libre</p></article>
+          <article class="event-small"><time datetime="2026-11-28">28.11.26</time><h3>Fragments de lumière</h3><p>Concert · Billetterie bientôt ouverte</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="artists" id="artistes" aria-labelledby="artists-title">
+      <div class="wrap">
+        <div class="artists-head">
+          <div>
+            <p class="eyebrow">03 / Les artistes</p>
+            <h2 class="section-title" id="artists-title">Les voix du renouveau</h2>
+          </div>
+          <a class="arrow-link" href="#contact">Découvrir tous les artistes</a>
+        </div>
+        <div class="artist-grid">
+          <article class="artist-card"><div class="artist-photo"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80" alt="Portrait d'une chanteuse" loading="lazy"></div><h3 class="artist-name">Élise Martin</h3><p class="artist-role">Soprano</p></article>
+          <article class="artist-card"><div class="artist-photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Portrait d'un chef d'orchestre" loading="lazy"></div><h3 class="artist-name">Nicolas Auriol</h3><p class="artist-role">Chef d'orchestre</p></article>
+          <article class="artist-card"><div class="artist-photo"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80" alt="Portrait d'une musicienne" loading="lazy"></div><h3 class="artist-name">Clara Dumas</h3><p class="artist-role">Alto & compositrice</p></article>
+          <article class="artist-card"><div class="artist-photo"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt="Portrait d'un chanteur" loading="lazy"></div><h3 class="artist-name">Gabriel Rey</h3><p class="artist-role">Baryton</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="choir-ribbon" aria-label="Photographies des choeurs">
+      <div class="choir-track">
+        <div class="choir-set">
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85" alt="Choeur en concert" loading="lazy"></figure>
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=900&q=85" alt="Chanteurs réunis sur scène" loading="lazy"></figure>
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="Voix chorales face au public" loading="lazy"></figure>
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85" alt="Musiciens et choristes en répétition" loading="lazy"></figure>
+        </div>
+        <div class="choir-set" aria-hidden="true">
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy"></figure>
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy"></figure>
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy"></figure>
+          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy"></figure>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="partners" id="partenaires" aria-labelledby="partners-title">
+      <div class="wrap">
+        <div class="partners-head">
+          <div>
+            <p class="eyebrow">04 / Partenaires & soutiens</p>
+            <h2 class="section-title" id="partners-title">Un mouvement porté ensemble</h2>
+            <p class="section-intro">Des partenaires engagés pour faire circuler les voix, les idées et les rencontres.</p>
+          </div>
+          <a class="arrow-link" href="#contact">Devenir partenaire</a>
+        </div>
+      </div>
+      <div class="partner-ribbon" aria-label="Nos partenaires">
+        <div class="partner-track" data-partner-row="0"></div>
+        <div class="partner-track partner-track--reverse" data-partner-row="1"></div>
+      </div>
+    </section>
+
+    <section class="manifesto" id="manifeste" aria-labelledby="manifesto-title">
+      <div class="wrap">
+        <div class="manifesto-grid">
+          <div><p class="eyebrow">05 / Le mouvement</p><h2 class="section-title" id="manifesto-title">Créer l'espace pour que la voix advienne.</h2></div>
+        </div>
+        <div class="manifesto-cards">
+          <article class="manifesto-card">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85" alt="Écouter ensemble" loading="lazy"></div>
+            <div class="manifesto-card-content">
+              <h3 class="manifesto-card-title">Écouter</h3>
+              <p class="manifesto-card-text">Créer un espace d'accueil et de reconnaissance pour chaque voix, chaque histoire, chaque perspective unique.</p>
+            </div>
+          </article>
+
+          <article class="manifesto-card manifesto-card--blue">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=85" alt="Rencontrer les artistes" loading="lazy"></div>
+            <div class="manifesto-card-content">
+              <h3 class="manifesto-card-title">Rencontrer</h3>
+              <p class="manifesto-card-text">Favoriser les rencontres authentiques qui déplacent les lignes et créent des connexions durables.</p>
+            </div>
+          </article>
+
+          <article class="manifesto-card">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=700&q=85" alt="Créer la musique" loading="lazy"></div>
+            <div class="manifesto-card-content">
+              <h3 class="manifesto-card-title">Créer</h3>
+              <p class="manifesto-card-text">Donner naissance à une musique nouvelle, portée par la puissance du collectif et l'audace.</p>
+            </div>
+          </article>
+
+          <article class="manifesto-card">
+            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=700&q=85" alt="Apprendre ensemble" loading="lazy"></div>
+            <div class="manifesto-card-content">
+              <h3 class="manifesto-card-title">Apprendre</h3>
+              <p class="manifesto-card-text">Transmettre les savoirs et les techniques pour permettre à chacun de se réinventer et d'évoluer.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="eyebrow">06 / Contact</p>
+          <h2 class="section-title" id="contact-title">Rejoindre le mouvement</h2>
+          <p class="section-intro">Artiste, mécène, partenaire ou spectateur : écrivez-nous et faisons résonner la suite.</p>
+          <form class="contact-form" action="#contact" method="post">
+            <label>Nom <input type="text" name="nom" autocomplete="name" required></label>
+            <label>Email <input type="email" name="email" autocomplete="email" required></label>
+            <label>Sujet <select name="sujet"><option>Partenariat</option><option>Artiste</option><option>Autre</option></select></label>
+            <label>Message <textarea name="message" required></textarea></label>
+            <button class="button" type="submit">Envoyer le message</button>
+          </form>
+          <div class="contact-links" aria-label="Nous contacter sur nos canaux directs">
+            <a class="contact-social contact-social--phone" href="tel:+33100000000" aria-label="Appeler ALTO au 01 00 00 00 00">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5 9.2 3l2 4.7-1.8 1.5a15.3 15.3 0 0 0 5.4 5.4l1.5-1.8 4.7 2-.5 2.6a2 2 0 0 1-2.2 1.6C10.6 18.1 5.9 13.4 5 5.7A2 2 0 0 1 6.6 3.5Z" /></svg>
+              <span>Téléphone</span>
+            </a>
+            <a class="contact-social" href="https://www.facebook.com/alto" target="_blank" rel="noreferrer" aria-label="Retrouver ALTO sur Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V4a22 22 0 0 0-2.4-.1c-2.4 0-4 1.5-4 4.1V10H8v3h2.4v8h3.1Z" /></svg>
+              <span>Facebook</span>
+            </a>
+            <a class="contact-social" href="https://www.instagram.com/alto" target="_blank" rel="noreferrer" aria-label="Retrouver ALTO sur Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.3 3h9.4A4.3 4.3 0 0 1 21 7.3v9.4a4.3 4.3 0 0 1-4.3 4.3H7.3A4.3 4.3 0 0 1 3 16.7V7.3A4.3 4.3 0 0 1 7.3 3Zm0 2A2.3 2.3 0 0 0 5 7.3v9.4A2.3 2.3 0 0 0 7.3 19h9.4a2.3 2.3 0 0 0 2.3-2.3V7.3A2.3 2.3 0 0 0 16.7 5H7.3Zm9.9 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7.8a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm0 2a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4Z" /></svg>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-gallery" aria-label="Des voix réunies par ALTO">
+          <figure><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85" alt="Portrait d'une chanteuse" loading="lazy"></figure>
+          <figure><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="Chanteuse en scène face à son public" loading="lazy"></figure>
+          <figure><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85" alt="Portrait d'une musicienne" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div><div class="footer-brand"><img src="01_logo_ALTO_principal_vertical_4000px.png" alt="">ALTO</div><p class="footer-tagline">L'écho d'un renouveau.</p></div>
+        <div><p class="footer-heading">Explorer</p><nav class="footer-links" aria-label="Navigation secondaire"><a href="#programmation">Programmation</a><a href="#artistes">Artistes</a><a href="#partenaires">Partenaires</a><a href="#vision">Notre vision</a><a href="#contact">Contact</a></nav></div>
+        <div><p class="footer-heading">La lettre ALTO</p><p class="footer-links">Restez informé du renouveau lyrique.</p><form class="newsletter"><label class="sr-only" for="newsletter-email">Votre adresse email</label><input id="newsletter-email" type="email" placeholder="Votre email" required><button type="submit" aria-label="S'inscrire à la newsletter">↗</button></form></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 ALTO</span><span>Mentions légales · Crédits</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('#main-menu');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    const partners = [
+      { name: 'Maison Lyrique', mark: 'ML' },
+      { name: 'Les Voix Unies', mark: 'LV' },
+      { name: 'Atelier Sonore', mark: 'AS' },
+      { name: 'Horizon Culture', mark: 'HC' },
+      { name: 'Fondation Harmonie', mark: 'FH' }
+    ];
+    const partnerRows = [partners.slice(0, 3), partners.slice(3)];
+    document.querySelectorAll('[data-partner-row]').forEach((track, rowIndex) => {
+      const partnerSet = document.createElement('div');
+      partnerSet.className = 'partner-set';
+      partnerSet.setAttribute('aria-hidden', 'true');
+      partnerRows[rowIndex].forEach(({ name, mark }) => {
+        const card = document.createElement('div');
+        card.className = 'partner-card';
+        const label = document.createElement('span');
+        label.textContent = name;
+        label.dataset.mark = mark;
+        card.append(label);
+        partnerSet.append(card);
+      });
+      track.append(partnerSet, partnerSet.cloneNode(true));
+    });
+
+    const eventCarousel = document.querySelector('.event-carousel');
+    const eventProgress = [...document.querySelectorAll('.event-progress button')];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let eventTimer;
+    let eventIsVisible = false;
+    const updateEventProgress = () => {
+      const step = eventCarousel.clientWidth + 16;
+      const activeIndex = Math.min(eventProgress.length - 1, Math.round(eventCarousel.scrollLeft / step));
+      eventProgress.forEach((dot, index) => dot.setAttribute('aria-current', String(index === activeIndex)));
+    };
+    const stopEventAutoplay = () => {
+      clearInterval(eventTimer);
+      eventTimer = undefined;
+    };
+    const advanceEvents = () => {
+      const step = eventCarousel.clientWidth + 16;
+      const isLastEvent = eventCarousel.scrollLeft + eventCarousel.clientWidth >= eventCarousel.scrollWidth - 4;
+      eventCarousel.scrollTo({ left: isLastEvent ? 0 : eventCarousel.scrollLeft + step, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    };
+    const startEventAutoplay = () => {
+      stopEventAutoplay();
+      if (eventIsVisible && !reducedMotion.matches) eventTimer = setInterval(advanceEvents, 5000);
+    };
+    const eventVisibilityObserver = new IntersectionObserver(([entry]) => {
+      eventIsVisible = entry.isIntersecting;
+      eventIsVisible ? startEventAutoplay() : stopEventAutoplay();
+    }, { threshold: .5 });
+    eventVisibilityObserver.observe(eventCarousel);
+    eventCarousel.addEventListener('scroll', updateEventProgress, { passive: true });
+    eventProgress.forEach((dot, index) => dot.addEventListener('click', () => {
+      stopEventAutoplay();
+      eventCarousel.scrollTo({ left: index * (eventCarousel.clientWidth + 16), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      if (eventIsVisible) startEventAutoplay();
+    }));
+    eventCarousel.addEventListener('mouseenter', stopEventAutoplay);
+    eventCarousel.addEventListener('mouseleave', startEventAutoplay);
+    eventCarousel.addEventListener('focusin', stopEventAutoplay);
+    eventCarousel.addEventListener('focusout', startEventAutoplay);
+    document.addEventListener('visibilitychange', () => document.hidden ? stopEventAutoplay() : startEventAutoplay());
+
+    document.querySelectorAll('form').forEach((form) => form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const button = form.querySelector('button[type="submit"]');
+      if (button) {
+        const originalText = button.textContent;
+        button.textContent = 'Merci, à bientôt';
+        setTimeout(() => { button.textContent = originalText; }, 2600);
+      }
+    }));
+  </script>
+</body>
+</html>
