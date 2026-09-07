@@ -203,7 +203,6 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .partner-line, .choir-track, .quote-run { animation: none; }
-      .event-carousel { scroll-behavior: auto; }
     }
 
     footer { padding: 70px 0 25px; background: var(--ink-deep); color: var(--white); }
@@ -237,11 +236,20 @@
       .positioning-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 80px; align-items: start; }
       .positioning-main { grid-column: 2; grid-row: 1; }
       .positioning-secondary { grid-column: 1; grid-row: 2; padding-top: 28px; }
-      .events-head, .partners-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
-      .events-head .arrow-link, .partners-head .arrow-link { margin-top: 30px; }
-      .event-feature { grid-template-columns: 1.18fr .82fr; min-height: 430px; align-items: center; background: transparent; }
-      .event-image { min-height: 0; aspect-ratio: 16 / 10; }
-      .event-detail { margin: 0 0 0 -42px; padding: 48px 42px 42px; }
+      .partners-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+      .partners-head .arrow-link { margin-top: 30px; }
+      .events-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 60px; margin-bottom: 34px; }
+      .events-desc { margin-top: 10px; font-size: 1.4rem; }
+      .events-stage { padding: 54px 50px 48px; border-radius: 34px; }
+      .events-stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; margin-bottom: 8px; }
+      .events-stage-lead { margin: 0; max-width: 300px; }
+      .events-stage-title { font-size: clamp(3.5rem, 6vw, 5.5rem); }
+      .event-fan { margin: 10px 0 40px; }
+      .event-poster { width: clamp(200px, 18vw, 244px); }
+      .event-poster[data-pos="left"] { margin-right: -22px; }
+      .event-poster[data-pos="right"] { margin-left: -22px; }
+      .event-caption { gap: 24px; padding-top: 28px; }
+      .event-caption-value { font-size: 1rem; }
       .manifesto-grid { grid-template-columns: .8fr 1.5fr; gap: 80px; }
       .pillars { grid-template-columns: repeat(4, 1fr); margin-top: 75px; }
       .pillar:nth-child(2) { border-right: 1px solid rgba(9,29,49,.25); }
@@ -315,54 +323,48 @@
     <section class="events" id="programmation" aria-labelledby="events-title">
       <div class="wrap">
         <div class="events-head">
-          <div>
-            <!-- <p class="eyebrow">02 / À l'affiche</p> -->
-            <h2 class="section-title" id="events-title">Les événements à venir</h2>
+          <h2 class="events-title" id="events-title">Les événements<br>à venir</h2>
+          <p class="events-desc">Trois rendez-vous pour faire vibrer les voix — concerts, masterclass et rencontres à découvrir cette saison.</p>
+        </div>
+
+        <div class="events-stage">
+          <div class="events-stage-head">
+            <p class="events-stage-lead">La programmation ALTO — des créations chorales pensées comme des expériences vivantes, uniques comme les voix qui les portent.</p>
+            <h3 class="events-stage-title">À l'affiche</h3>
           </div>
-          <!-- <a class="arrow-link" href="#contact">Toute la programmation</a> -->
-        </div>
-        <div class="event-carousel" tabindex="0" aria-label="Affiches des prochains événements">
-          <article class="event-feature">
-            <div class="event-image" role="img" aria-label="Musiciens réunis autour d'un piano"></div>
-            <div class="event-detail">
-              <div>
-                <span class="badge">Concert</span>
-                <p class="event-date">14 octobre 2026 · 20h00</p>
-                <h3 class="event-title">Le souffle<br>des voix</h3>
-                <p class="event-place">Une création chorale en mouvement</p>
-              </div>
-              <a class="button" href="#contact">Réserver / découvrir</a>
+
+          <div class="event-fan" role="group" aria-label="Affiches des prochains événements">
+            <button class="event-poster" type="button" data-pos="left" aria-label="Événement précédent">
+              <span class="event-poster-media"></span>
+              <span class="event-poster-badge">Rencontre</span>
+              <span class="event-poster-name">Rencontre avec les voix</span>
+            </button>
+            <button class="event-poster" type="button" data-pos="center" aria-label="Réserver l'événement">
+              <span class="event-poster-media"></span>
+              <span class="event-poster-badge">Concert</span>
+              <span class="event-poster-name">Le souffle des voix</span>
+            </button>
+            <button class="event-poster" type="button" data-pos="right" aria-label="Événement suivant">
+              <span class="event-poster-media"></span>
+              <span class="event-poster-badge">Masterclass</span>
+              <span class="event-poster-name">Écouter autrement</span>
+            </button>
+          </div>
+
+          <div class="event-caption">
+            <div class="event-caption-block event-caption-block--date">
+              <span class="event-caption-label">Date & heure</span>
+              <span class="event-caption-value" data-field="date">14 octobre 2026 · 20h00</span>
             </div>
-          </article>
-          <article class="event-feature">
-            <div class="event-image event-image--workshop" role="img" aria-label="Choeur réuni pour une représentation"></div>
-            <div class="event-detail">
-              <div>
-                <span class="badge">Masterclass</span>
-                <p class="event-date">22 octobre 2026 · 14h00</p>
-                <h3 class="event-title">Écouter<br>autrement</h3>
-                <p class="event-place">Un atelier pour ouvrir l'oreille et la voix</p>
-              </div>
-              <a class="button" href="#contact">Découvrir</a>
+            <div class="event-nav">
+              <button class="event-arrow" type="button" data-dir="-1" aria-label="Événement précédent">←</button>
+              <button class="event-arrow" type="button" data-dir="1" aria-label="Événement suivant">→</button>
             </div>
-          </article>
-          <article class="event-feature">
-            <div class="event-image event-image--meeting" role="img" aria-label="Chanteurs sur une scène éclairée"></div>
-            <div class="event-detail">
-              <div>
-                <span class="badge">Rencontre</span>
-                <p class="event-date">07 novembre 2026 · 18h30</p>
-                <h3 class="event-title">Rencontre<br>avec les voix</h3>
-                <p class="event-place">Une conversation ouverte avec les artistes ALTO</p>
-              </div>
-              <a class="button" href="#contact">Réserver / découvrir</a>
+            <div class="event-caption-block event-caption-block--place">
+              <span class="event-caption-label">Lieu</span>
+              <span class="event-caption-value" data-field="place">Grand Auditorium</span>
             </div>
-          </article>
-        </div>
-        <div class="event-progress" aria-label="Progression des événements">
-          <button type="button" aria-label="Afficher le premier événement" aria-current="true"></button>
-          <button type="button" aria-label="Afficher le deuxième événement" aria-current="false"></button>
-          <button type="button" aria-label="Afficher le troisième événement" aria-current="false"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -516,53 +518,42 @@
       menuToggle.setAttribute('aria-expanded', 'false');
     }));
 
-    const eventCarousel = document.querySelector('.event-carousel');
-    const eventProgress = [...document.querySelectorAll('.event-progress button')];
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let eventTimer;
-    let eventIsVisible = false;
-    const updateEventProgress = () => {
-      const step = eventCarousel.clientWidth + 16;
-      const activeIndex = Math.min(eventProgress.length - 1, Math.round(eventCarousel.scrollLeft / step));
-      eventProgress.forEach((dot, index) => dot.setAttribute('aria-current', String(index === activeIndex)));
-    };
-    const stopEventAutoplay = () => {
-      clearInterval(eventTimer);
-      eventTimer = undefined;
-    };
-    const turnEventPage = () => {
-      const activeEvent = eventCarousel.querySelector('.event-feature');
-      activeEvent.classList.remove('is-turning');
-      void activeEvent.offsetWidth;
-      activeEvent.classList.add('is-turning');
-    };
-    const advanceEvents = () => {
-      const step = eventCarousel.clientWidth + 16;
-      const isLastEvent = eventCarousel.scrollLeft + eventCarousel.clientWidth >= eventCarousel.scrollWidth - 4;
-      turnEventPage();
-      eventCarousel.scrollTo({ left: isLastEvent ? 0 : eventCarousel.scrollLeft + step, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-    };
-    const startEventAutoplay = () => {
-      stopEventAutoplay();
-      if (eventIsVisible && !reducedMotion.matches) eventTimer = setInterval(advanceEvents, 5000);
-    };
-    const eventVisibilityObserver = new IntersectionObserver(([entry]) => {
-      eventIsVisible = entry.isIntersecting;
-      eventIsVisible ? startEventAutoplay() : stopEventAutoplay();
-    }, { threshold: .5 });
-    eventVisibilityObserver.observe(eventCarousel);
-    eventCarousel.addEventListener('scroll', updateEventProgress, { passive: true });
-    eventProgress.forEach((dot, index) => dot.addEventListener('click', () => {
-      stopEventAutoplay();
-      turnEventPage();
-      eventCarousel.scrollTo({ left: index * (eventCarousel.clientWidth + 16), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-      if (eventIsVisible) startEventAutoplay();
-    }));
-    eventCarousel.addEventListener('mouseenter', stopEventAutoplay);
-    eventCarousel.addEventListener('mouseleave', startEventAutoplay);
-    eventCarousel.addEventListener('focusin', stopEventAutoplay);
-    eventCarousel.addEventListener('focusout', startEventAutoplay);
-    document.addEventListener('visibilitychange', () => document.hidden ? stopEventAutoplay() : startEventAutoplay());
+    const eventsData = [
+      { badge: 'Concert', name: 'Le souffle des voix', date: '14 octobre 2026 · 20h00', place: 'Grand Auditorium', img: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85' },
+      { badge: 'Masterclass', name: 'Écouter autrement', date: '22 octobre 2026 · 14h00', place: 'Studio des voix ALTO', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85' },
+      { badge: 'Rencontre', name: 'Rencontre avec les voix', date: '07 novembre 2026 · 18h30', place: 'Salon des artistes', img: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85' },
+    ];
+    const eventFan = document.querySelector('.event-fan');
+    if (eventFan) {
+      const posters = {
+        left: eventFan.querySelector('[data-pos="left"]'),
+        center: eventFan.querySelector('[data-pos="center"]'),
+        right: eventFan.querySelector('[data-pos="right"]'),
+      };
+      const n = eventsData.length;
+      let current = 0;
+      const fillPoster = (poster, data, role) => {
+        poster.querySelector('.event-poster-media').style.backgroundImage = `url('${data.img}')`;
+        poster.querySelector('.event-poster-badge').textContent = data.badge;
+        poster.querySelector('.event-poster-name').textContent = data.name;
+        const labels = { center: `Réserver : ${data.name}`, left: `Voir : ${data.name}`, right: `Voir : ${data.name}` };
+        poster.setAttribute('aria-label', labels[role]);
+      };
+      const render = () => {
+        fillPoster(posters.center, eventsData[current], 'center');
+        fillPoster(posters.left, eventsData[(current - 1 + n) % n], 'left');
+        fillPoster(posters.right, eventsData[(current + 1) % n], 'right');
+        document.querySelectorAll('.event-caption-value').forEach((el) => {
+          el.textContent = eventsData[current][el.dataset.field];
+        });
+      };
+      const go = (dir) => { current = (current + dir + n) % n; render(); };
+      posters.left.addEventListener('click', () => go(-1));
+      posters.right.addEventListener('click', () => go(1));
+      posters.center.addEventListener('click', () => { window.location.hash = '#contact'; });
+      document.querySelectorAll('.event-arrow').forEach((btn) => btn.addEventListener('click', () => go(Number(btn.dataset.dir))));
+      render();
+    }
 
     document.querySelectorAll('form').forEach((form) => form.addEventListener('submit', (event) => {
       event.preventDefault();
