@@ -85,31 +85,40 @@
     .positioning-main, .positioning-secondary { min-width: 0; }
     .positioning-secondary { padding-top: 28px; border-top: 1px solid var(--line); }
 
-    .events { background: var(--ink); color: var(--white); }
-    .events .section-intro { color: rgba(255,255,255,.65); }
-    .events-head { display: block; gap: 30px; margin-bottom: 55px; }
-    .events-head .arrow-link { margin-top: 20px; }
-    .event-carousel { display: flex; gap: 16px; max-width: 100%; overflow-x: auto; padding: 8px 0 18px; scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-x; perspective: 1200px; }
-    .event-carousel::-webkit-scrollbar { display: none; }
-    .event-carousel .event-feature { flex: 0 0 100%; scroll-snap-align: start; }
-    .event-progress { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
-    .event-progress button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer; transition: background .2s ease, transform .2s ease; }
-    .event-progress button[aria-current="true"] { background: var(--gold-light); transform: scale(1.35); }
-    .events-head .arrow-link { color: var(--white); }
-    .event-feature { position: relative; display: grid; grid-template-columns: 1fr; min-height: 530px; background: var(--paper-light); color: var(--ink); transform-origin: center right; }
-    .event-feature.is-turning { animation: event-page-turn .65s cubic-bezier(.22,.61,.36,1); }
-    .event-image { min-height: 270px; aspect-ratio: 16 / 10; background: url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1300&q=85') center/cover; }
-    .event-image--workshop { background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1300&q=85'); }
-    .event-image--meeting { background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1300&q=85'); }
-    .event-detail { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; margin: -18px 14px 0; padding: 32px 24px 28px; background: var(--paper-light); box-shadow: 0 14px 28px rgba(9,29,49,.12); }
-    .event-detail::before { position: absolute; top: 10px; left: 50%; width: 15px; height: 15px; border: 2px solid var(--gold); border-radius: 50%; background: var(--ink-deep); box-shadow: 0 3px 0 rgba(9,29,49,.2); content: ''; transform: translateX(-50%); }
-    .event-detail::after { position: absolute; top: 16px; left: 50%; width: 38px; height: 1px; background: rgba(16,44,73,.22); content: ''; transform: translateX(-50%); }
-    .badge { display: inline-flex; align-self: start; padding: 7px 10px; background: var(--ink); color: var(--white); font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .event-date { margin: 26px 0 8px; color: var(--gold); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-    .event-title { margin: 0; font: 500 clamp(2rem, 4vw, 3.5rem)/1.02 var(--serif); }
-    .event-place { margin: 18px 0 0; color: rgba(16,44,73,.7); }
-    .event-detail .button { align-self: start; margin-top: 30px; }
-    @keyframes event-page-turn { 0% { opacity: 1; transform: rotateY(0) translateX(0); } 45% { opacity: .45; transform: rotateY(-8deg) translateX(-18px); } 100% { opacity: 1; transform: rotateY(0) translateX(0); } }
+    .events { background: var(--paper); color: var(--ink); }
+    .events-head { display: block; margin-bottom: 34px; }
+    .events-title { margin: 0; font: 500 clamp(2.25rem, 6vw, 4.2rem)/.98 var(--serif); letter-spacing: -.04em; }
+    .events-desc { max-width: 440px; margin: 18px 0 0; color: rgba(16,44,73,.7); font: italic 500 1.15rem/1.45 var(--serif); }
+
+    .events-stage { position: relative; overflow: hidden; padding: 40px 20px 36px; border-radius: 24px; background: var(--ink-deep); color: var(--white); }
+    .events-stage-head { margin-bottom: 22px; }
+    .events-stage-lead { max-width: 340px; margin: 0 0 16px; color: rgba(255,255,255,.6); font-size: .82rem; line-height: 1.55; }
+    .events-stage-title { margin: 0; font: 700 clamp(2.3rem, 11vw, 4rem)/.9 var(--sans); letter-spacing: -.02em; text-transform: uppercase; }
+
+    .event-fan { display: flex; justify-content: center; align-items: center; margin: 4px 0 30px; }
+    .event-poster { position: relative; flex: 0 0 auto; width: clamp(120px, 33vw, 200px); aspect-ratio: 3 / 4.2; padding: 0; border: 0; border-radius: 18px; overflow: hidden; background: #16203a; cursor: pointer; transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, opacity .4s ease; }
+    .event-poster-media { position: absolute; inset: 0; background: #16203a center/cover no-repeat; filter: saturate(.72) brightness(.8); transition: filter .5s ease, transform .6s ease; }
+    .event-poster::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,14,26,.9) 0%, rgba(6,14,26,.15) 52%); }
+    .event-poster-badge { position: absolute; z-index: 2; top: 12px; left: 50%; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.18); color: var(--white); font: 500 .58rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: 0; transition: opacity .3s ease; transform: translateX(-50%); }
+    .event-poster-name { position: absolute; z-index: 2; right: 14px; bottom: 15px; left: 14px; color: var(--white); font: 500 1.1rem/1.12 var(--serif); text-align: left; }
+    .event-poster:hover .event-poster-media { filter: saturate(.95) brightness(.92); transform: scale(1.05); }
+    .event-poster:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+    .event-poster[data-pos="left"] { transform: rotate(-8deg) translateY(16px) scale(.86); transform-origin: bottom right; margin-right: -28px; z-index: 1; }
+    .event-poster[data-pos="right"] { transform: rotate(8deg) translateY(16px) scale(.86); transform-origin: bottom left; margin-left: -28px; z-index: 1; }
+    .event-poster[data-pos="center"] { transform: translateY(-12px) scale(1.02); z-index: 3; box-shadow: 0 26px 48px rgba(0,0,0,.5); }
+    .event-poster[data-pos="center"] .event-poster-media { filter: saturate(1) brightness(.96); }
+    .event-poster[data-pos="center"] .event-poster-badge { opacity: 1; }
+
+    .event-caption { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); }
+    .event-caption-block { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .event-caption-block--place { align-items: flex-end; text-align: right; }
+    .event-caption-label { color: var(--gold-light); font: 500 .58rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    .event-caption-value { color: var(--white); font-size: .9rem; }
+    .event-nav { display: flex; gap: 10px; }
+    .event-arrow { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: transparent; color: var(--white); cursor: pointer; font-size: 1.05rem; transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
+    .event-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--ink-deep); transform: translateY(-2px); }
+    .event-arrow:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .event-poster, .event-poster-media { transition: none; } }
     .choir-ribbon { position: relative; z-index: 1; overflow: visible; padding: 0; background: transparent; }
     .choir-track { display: flex; width: max-content; animation: choir-scroll 42s linear infinite; }
     .choir-set { display: flex; gap: 0; padding-right: 0; }
@@ -272,12 +281,12 @@
         </div>
       </div>
       <span class="scroll-note">Faire vibrer les voix</span>
-      <div class="hero-wave" aria-hidden="true">
+      <!-- <div class="hero-wave" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
           <path class="hero-wave-back" d="M0,60 C240,120 420,20 720,56 C1000,92 1200,26 1440,64 L1440,120 L0,120 Z"/>
           <path class="hero-wave-front" d="M0,84 C260,44 520,104 780,80 C1040,58 1260,98 1440,76 L1440,120 L0,120 Z"/>
         </svg>
-      </div>
+      </div> -->
     </section>
 
     <div class="quote-ribbon" role="note" aria-label="Citation ALTO">
