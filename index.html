@@ -97,7 +97,7 @@
 
     section { padding: 80px 0; }
     .positioning { position: relative; isolation: isolate; overflow: hidden; background: transparent; color: var(--white); }
-    .positioning-video { position: absolute; z-index: 0; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px); object-fit: cover; filter: blur(3px); transform: scale(1.03); }
+    .positioning-video { position: absolute; z-index: 0; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px); object-fit: cover; background: url('bkg.jpeg') center/cover no-repeat; filter: blur(3px); opacity: .92; transform: scale(1.03); pointer-events: none; }
     .positioning::after { position: absolute; z-index: 1; inset: 0; background: rgba(9,29,49,.58); content: ''; pointer-events: none; }
     .positioning-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr; gap: 40px; }
     .positioning-main, .positioning-secondary { min-width: 0; }
@@ -400,7 +400,7 @@
     </div> -->
 
     <section class="positioning" id="vision" aria-labelledby="positioning-title">
-      <video class="positioning-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <video class="positioning-video" muted loop playsinline preload="auto" poster="bkg.jpeg" aria-hidden="true">
         <source src="animation.mp4" type="video/mp4">
       </video>
       <div class="wrap positioning-grid">
@@ -416,12 +416,7 @@
       </div>
     </section>
 
-    <div class="marquee-ribbon" role="note" aria-label="Mots ALTO">
-      <div class="marquee-track" aria-hidden="true">
-        <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
-        <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
-      </div>
-    </div>
+    
 
     <section class="gallery" id="galerie" aria-labelledby="gallery-title">
       <div class="wrap">
@@ -439,6 +434,12 @@
         </div>
       </div>
     </section>
+    <div class="marquee-ribbon" role="note" aria-label="Mots ALTO">
+      <div class="marquee-track" aria-hidden="true">
+        <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
+        <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
+      </div>
+    </div>
 
     <section class="events" id="programmation" aria-labelledby="events-title">
       <div class="wrap">
@@ -642,13 +643,16 @@
     const positioningVideo = document.querySelector('.positioning-video');
     const positioningReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (positioning && positioningVideo) {
+      positioningVideo.load();
       const positioningObserver = new IntersectionObserver(([entry]) => {
         if (positioningReduceMotion) {
           positioningVideo.pause();
           return;
         }
         if (entry.isIntersecting) {
-          positioningVideo.play().catch(() => {});
+          positioningVideo.play().catch(() => {
+            positioningVideo.load();
+          });
         } else {
           positioningVideo.pause();
         }
