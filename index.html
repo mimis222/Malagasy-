@@ -638,6 +638,24 @@
       menuToggle.setAttribute('aria-expanded', 'false');
     }));
 
+    const positioning = document.querySelector('.positioning');
+    const positioningVideo = document.querySelector('.positioning-video');
+    const positioningReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (positioning && positioningVideo) {
+      const positioningObserver = new IntersectionObserver(([entry]) => {
+        if (positioningReduceMotion) {
+          positioningVideo.pause();
+          return;
+        }
+        if (entry.isIntersecting) {
+          positioningVideo.play().catch(() => {});
+        } else {
+          positioningVideo.pause();
+        }
+      }, { threshold: 0.2 });
+      positioningObserver.observe(positioning);
+    }
+
     const eventsData = [
       { badge: 'Concert', name: 'Le souffle des voix', date: '14 octobre 2026 · 20h00', place: 'Grand Auditorium', img: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85' },
       { badge: 'Masterclass', name: 'Écouter autrement', date: '22 octobre 2026 · 14h00', place: 'Studio des voix ALTO', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85' },
