@@ -352,7 +352,7 @@
 [data-reveal]{opacity:1!important;transform:none!important}
 [data-reveal-title] > span{transform:none!important;opacity:1!important}
 </style>
-<script>window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('manifeste').scrollIntoView();},200)});</script>
+<script>window.addEventListener('load',()=>{var m=document.getElementById('manifeste');document.documentElement.setAttribute('data-top',m.offsetTop);document.documentElement.setAttribute('data-bot',m.offsetTop+m.offsetHeight);});</script>
 </head>
 <body>
   <header class="site-header">
