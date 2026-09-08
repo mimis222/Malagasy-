@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap');
+:root{--ink:#102c49;--ink-deep:#091d31;--gold:#c38a2e;--gold-light:#e5bd6b;--paper:#f5f1e9;--white:#fffdf8;--sans:'Manrope',sans-serif;--serif:'Cormorant Garamond',serif;--mono:'DM Mono',monospace}
+body{margin:0;background:var(--paper);display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:40px;font-family:var(--sans)}
+.card{position:relative;display:flex;flex-direction:column;overflow:hidden;border-radius:20px;text-align:center;background:var(--white);color:var(--ink)}
+.card--blue{background:var(--ink-deep);color:var(--white)}
+.card--white{box-shadow:0 10px 30px rgba(9,29,49,.08)}
+.card--topo{color:var(--white);background:#04101b}
+.card--topo::before{content:"";position:absolute;inset:0;background:url('topo.svg') center/cover;z-index:0}
+.card--topo.flip::before{transform:scaleX(-1)}
+.img{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#d0c5ba;z-index:1}
+.img img{width:100%;height:100%;object-fit:cover;filter:saturate(.8)}
+.card--topo .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,16,27,.1),rgba(4,16,27,.55))}
+.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:34px;display:block}
+.wave path{fill:var(--white)}
+.card--blue .wave path{fill:var(--ink-deep)}
+.card--topo .wave path{fill:#071726}
+.content{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;padding:14px 22px 34px}
+.idx{font:500 .62rem var(--mono);letter-spacing:.18em;color:var(--gold);opacity:.9}
+.card--white .idx{color:var(--gold)}
+h3{margin:0;font:700 1.2rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:inherit}
+.card--blue h3,.card--topo h3{color:var(--gold-light)}
+.card--topo h3{text-shadow:0 2px 12px rgba(0,0,0,.55)}
+p{margin:0;font-size:.9rem;line-height:1.6;opacity:.85}
+.card--topo p{opacity:.9;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+</style></head><body>
+<article class="card card--blue"><div class="img"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85"><svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div><div class="content"><span class="idx">01</span><h3>Écouter</h3><p>Créer un espace d'accueil et de reconnaissance pour chaque voix, chaque histoire.</p></div></article>
+<article class="card card--topo"><div class="img"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=85"><svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div><div class="content"><span class="idx">02</span><h3>Rencontrer</h3><p>Favoriser les rencontres authentiques qui déplacent les lignes et créent des connexions.</p></div></article>
+<article class="card card--white"><div class="img"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=700&q=85"><svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div><div class="content"><span class="idx">03</span><h3>Créer</h3><p>Donner naissance à une musique nouvelle, portée par la puissance du collectif.</p></div></article>
+<article class="card card--topo flip"><div class="img"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=700&q=85"><svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div><div class="content"><span class="idx">04</span><h3>Apprendre</h3><p>Transmettre les savoirs et les techniques pour permettre à chacun de se réinventer.</p></div></article>
+</body></html>
