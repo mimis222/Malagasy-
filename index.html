@@ -7,7 +7,7 @@
   <link rel="icon" href="04_favicon_ALTO_512x512.png" type="image/png">
   <title>ALTO — L'écho d'un renouveau</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Music&display=swap');
 
     :root {
       --ink: #102c49;
@@ -106,10 +106,12 @@
     .positioning .arrow-link { color: var(--white); }
 
     /* ==== Ruban de texte + galerie encadrée ==== */
-    .marquee-ribbon { overflow: hidden; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-deep); color: var(--white); }
+    .marquee-ribbon { overflow: hidden; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-deep) url('bkgrbn.jpeg') center/cover; color: var(--white); }
     .marquee-track { display: flex; width: max-content; animation: marquee-scroll 26s linear infinite; }
-    .marquee-track span { display: inline-flex; align-items: center; padding: 0 28px; font: 500 clamp(1.1rem, 2.4vw, 1.7rem)/1 var(--serif); font-style: italic; white-space: nowrap; }
-    .marquee-track span::after { content: '✶'; margin-left: 56px; color: var(--gold-light); font-style: normal; }
+    .marquee-track span { display: inline-flex; align-items: center; padding: 0 28px; font: 500 clamp(1.1rem, 2.4vw, 1.7rem)/1 'Bodoni Moda', var(--serif); text-transform: uppercase; letter-spacing: .09em; white-space: nowrap; }
+    .marquee-track span::after { margin-left: 56px; font-family: 'Noto Music', var(--serif); font-size: 1.4em; line-height: 0; letter-spacing: 0; color: var(--gold-light); }
+    .marquee-track span:nth-child(odd)::after { content: '\01D11E'; }
+    .marquee-track span:nth-child(even)::after { content: '\01D122'; }
     .marquee-ribbon:hover .marquee-track { animation-play-state: paused; }
     @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
