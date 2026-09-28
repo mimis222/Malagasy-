@@ -6,23 +6,17 @@
   <meta name="description" content="ALTO - L'écho d'un renouveau lyrique.">
   <link rel="icon" href="favicon-64.png" type="image/png">
 
-  <!-- Resource hints : ouvre les connexions au plus tôt -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="dns-prefetch" href="https://images.unsplash.com">
 
-  <!-- Polices : chargement non bloquant (preload -> stylesheet) + fallback -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Music&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Music&display=swap"></noscript>
+  <!-- 2 polices au lieu de 5 -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap"></noscript>
 
-  <!-- Preload des visuels critiques (logo du loader + image hero/LCP) -->
   <link rel="preload" as="image" href="logo-loader.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1600&q=80" fetchpriority="high">
 
-  <title>ALTO ,  L'écho d'un renouveau</title>
+  <title>ALTO — L'écho d'un renouveau</title>
   <style>
-
     :root {
       --ink: #102c49;
       --ink-deep: #091d31;
@@ -30,281 +24,278 @@
       --gold-light: #e5bd6b;
       --paper: #f5f1e9;
       --paper-light: #fbfaf7;
-      --line: rgba(16, 44, 73, .18);
+      --line: rgba(16,44,73,.18);
       --white: #fffdf8;
       --sans: 'Manrope', sans-serif;
       --serif: 'Cormorant Garamond', Georgia, serif;
-      --mono: 'DM Mono', monospace;
     }
 
-    * { box-sizing: border-box; }
+    *,*::before,*::after { box-sizing: border-box; }
     html { overflow-x: hidden; scroll-behavior: smooth; scroll-padding-top: 90px; }
     body { width: 100%; margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.55; }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
-
-    /* ==== Page de chargement ==== */
-    #preloader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: #ffffff; opacity: 1; visibility: visible; transition: opacity .55s ease, visibility .55s ease; }
-    #preloader img { width: clamp(150px, 32vw, 260px); height: auto; animation: preloader-pulse 1.7s ease-in-out infinite; }
-    #preloader::after { content: ''; position: absolute; bottom: 16%; width: 116px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent) 0 0 / 220% 100%; animation: preloader-bar 1.1s linear infinite; }
-    #preloader.is-hidden { opacity: 0; visibility: hidden; }
-    body.preloading { overflow: hidden; }
-    @keyframes preloader-pulse { 0%, 100% { transform: scale(1); opacity: .8; } 50% { transform: scale(1.05); opacity: 1; } }
-    @keyframes preloader-bar { from { background-position: 220% 0; } to { background-position: -220% 0; } }
-    @media (prefers-reduced-motion: reduce) { #preloader img, #preloader::after { animation: none; } }
     button, input, select, textarea { font: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
+
+    /* ── PRELOADER ── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: grid; place-items: center;
+      background: #fff;
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+    #preloader img {
+      width: clamp(150px,32vw,260px); height: auto;
+      animation: preloader-pulse 1.7s ease-in-out infinite;
+    }
+    #preloader::after {
+      content: ''; position: absolute; bottom: 16%;
+      width: 116px; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg,transparent,var(--gold),transparent) 0 0/220% 100%;
+      animation: preloader-bar 1.1s linear infinite;
+    }
+    #preloader.is-hidden { opacity: 0; visibility: hidden; }
+    body.preloading { overflow: hidden; }
+    @keyframes preloader-pulse { 0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.05);opacity:1} }
+    @keyframes preloader-bar { from{background-position:220% 0}to{background-position:-220% 0} }
+
+    /* ── UTILITAIRES ── */
     .wrap { width: min(100% - 32px, 600px); margin-inline: auto; }
-    .eyebrow { margin: 0 0 16px; color: var(--gold); font: 500 .68rem/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-    .section-title { max-width: 680px; margin: 0; font: 500 clamp(2.25rem, 5vw, 4.5rem)/.98 var(--serif); letter-spacing: -.04em; }
-    .section-intro { max-width: 480px; margin: 22px 0 0; color: rgba(16, 44, 73, .74); font-size: 1rem; }
-    .arrow-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; color: var(--ink); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-    .arrow-link::after { content: '↗'; color: var(--gold); font-size: 1.2rem; transition: transform .2s ease; }
-    .arrow-link:hover::after { transform: translate(3px, -3px); }
-    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; transition: background .2s ease, color .2s ease, transform .2s ease; }
+    .eyebrow { margin: 0 0 16px; color: var(--gold); font: 500 .68rem/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+    .section-title { max-width: 680px; margin: 0; font: 500 clamp(2.25rem,5vw,4.5rem)/.98 var(--serif); letter-spacing: -.04em; }
+    .section-intro { max-width: 480px; margin: 22px 0 0; color: rgba(16,44,73,.74); font-size: 1rem; }
+    .arrow-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; color: var(--ink); font: 500 .68rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+    .arrow-link::after { content: '↗'; color: var(--gold); font-size: 1.2rem; transition: transform .2s; }
+    .arrow-link:hover::after { transform: translate(3px,-3px); }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border: 1px solid var(--ink); background: var(--ink); color: var(--white); font: 500 .68rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; transition: background .2s, color .2s, transform .2s; }
     .button:hover { background: var(--ink-deep); transform: translateY(-2px); }
     .hero .button:not(.button--ghost) { border-color: var(--gold); background: var(--gold); color: var(--ink-deep); }
     .hero .button:not(.button--ghost):hover { background: var(--gold-light); }
     .button--ghost { border-color: rgba(255,255,255,.55); background: transparent; color: var(--white); }
     .button--ghost:hover { background: var(--white); color: var(--ink); }
 
-    .site-header { position: fixed; z-index: 100; top: 0; right: 0; left: 0; width: 100%; color: var(--white); }
-    .nav { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 60px; margin-top: 12px; padding: 0 10px 0 18px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(9,29,49,.72); box-shadow: 0 14px 34px rgba(9,29,49,.28); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    /* ── NAV ── */
+    .site-header { position: fixed; z-index: 100; top: 0; right: 0; left: 0; color: var(--white); }
+    .nav { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 60px; margin-top: 12px; padding: 0 10px 0 18px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(9,29,49,.72); box-shadow: 0 14px 34px rgba(9,29,49,.28); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
     .brand { display: flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 700; letter-spacing: .28em; }
     .brand img { width: 36px; height: 36px; object-fit: contain; filter: brightness(0) invert(1); }
-    .nav-links { position: absolute; z-index: 101; top: calc(100% + 10px); right: 0; left: 0; display: none; padding: 22px; border: 1px solid rgba(255,255,255,.14); border-radius: 26px; background: rgba(9,29,49,.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); flex-direction: column; align-items: start; gap: 16px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links { position: absolute; z-index: 101; top: calc(100% + 10px); right: 0; left: 0; display: none; padding: 22px; border: 1px solid rgba(255,255,255,.14); border-radius: 26px; background: rgba(9,29,49,.96); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); flex-direction: column; align-items: start; gap: 16px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
     .nav-links.is-open { display: flex; }
-    .nav-links a { opacity: .8; transition: opacity .2s ease; }
+    .nav-links a { opacity: .8; transition: opacity .2s; }
     .nav-links a:hover { opacity: 1; }
-    .nav-action { display: none; padding: 12px 22px; border: 1px solid var(--gold); border-radius: 999px; background: var(--gold); color: var(--ink-deep); font-size: .65rem; font-weight: 700; letter-spacing: .1em; transition: background .2s ease, transform .2s ease; }
+    .nav-action { display: none; padding: 12px 22px; border: 1px solid var(--gold); border-radius: 999px; background: var(--gold); color: var(--ink-deep); font-size: .65rem; font-weight: 700; letter-spacing: .1em; transition: background .2s, transform .2s; }
     .nav-action:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .menu-toggle { display: block; border: 0; background: none; color: inherit; font-size: 1.5rem; }
-    .menu-toggle:focus-visible, .nav-links a:focus-visible, .brand:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 5px; }
-    section, .quote-ribbon, footer { scroll-margin-top: 72px; }
+    .menu-toggle { display: block; border: 0; background: none; color: inherit; font-size: 1.5rem; cursor: pointer; }
 
+    /* ── HERO ── */
     .hero { position: relative; display: flex; min-height: 640px; align-items: center; overflow: hidden; background: var(--ink-deep); color: var(--white); }
-    .hero::before { position: absolute; inset: -8% -3%; background: linear-gradient(90deg, rgba(5,21,35,.9) 0%, rgba(5,21,35,.55) 44%, rgba(5,21,35,.12) 100%), url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1600&q=80') center/cover; content: ''; transform: rotate(-1.5deg) scale(1.08) translateY(var(--hero-shift, 0px)); }
-    .hero::after { display: none; }
-    .hero-content { position: relative; z-index: 1; width: calc(100% - 24px); margin-left: 24px; padding: 130px 0 90px; }
-    .hero h1 { margin: 0; font: 500 clamp(2rem, 8.5vw, 7rem)/1 var(--serif); letter-spacing: -.02em; white-space: nowrap; }
+    .hero::before { position: absolute; inset: -8% -3%; background: linear-gradient(90deg,rgba(5,21,35,.9) 0%,rgba(5,21,35,.55) 44%,rgba(5,21,35,.12) 100%), url('bkg.jpeg') center/cover; content: ''; transform: rotate(-1.5deg) scale(1.08) translateY(var(--hero-shift,0px)); will-change: transform; }
+    .hero-content { position: relative; z-index: 1; width: calc(100% - 24px); margin-left: 24px; padding: 130px 0 90px; will-change: transform; }
+    .hero h1 { margin: 0; font: 500 clamp(2rem,8.5vw,7rem)/1 var(--serif); letter-spacing: -.02em; white-space: nowrap; }
     .hero h1 .type-text { white-space: nowrap; }
     .hero h1 .type-text .w-echo { font-style: italic; font-weight: 500; }
     .hero h1 .type-text .w-strong { display: inline-block; font-family: var(--sans); font-weight: 800; letter-spacing: -.03em; text-transform: uppercase; color: var(--gold-light); }
-    /* Distinction de RENOUVEAU une fois le texte écrit */
-    .hero h1.type-done .w-strong { background: linear-gradient(100deg, transparent 38%, rgba(255,246,220,.85) 50%, transparent 62%) 220% 0 / 250% 100% no-repeat, linear-gradient(180deg, #a06a1f 0%, #e5bd6b 14%, #fff3d0 30%, #d6a340 46%, #7a4e12 50%, #6a4310 52%, #cf9a34 60%, #fff3d6 82%, #ffe6a6 92%, #b78a2e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; filter: drop-shadow(0 2px 4px rgba(0,0,0,.45)) drop-shadow(0 0 16px rgba(229,189,107,.3)); animation: renouveau-shine 3.6s ease-in-out infinite, renouveau-pop .7s cubic-bezier(.2,.9,.25,1.25) both; }
-    @keyframes renouveau-shine { 0% { background-position: 220% 0, 0 0; } 100% { background-position: -140% 0, 0 0; } }
-    @keyframes renouveau-pop { from { transform: scale(.9); filter: brightness(1.8) drop-shadow(0 2px 4px rgba(0,0,0,.45)) drop-shadow(0 0 16px rgba(229,189,107,.3)); } to { transform: scale(1); filter: brightness(1) drop-shadow(0 2px 4px rgba(0,0,0,.45)) drop-shadow(0 0 16px rgba(229,189,107,.3)); } }
+    .hero h1.type-done .w-strong { background: linear-gradient(100deg,transparent 38%,rgba(255,246,220,.85) 50%,transparent 62%) 220% 0/250% 100% no-repeat, linear-gradient(180deg,#a06a1f 0%,#e5bd6b 14%,#fff3d0 30%,#d6a340 46%,#7a4e12 50%,#6a4310 52%,#cf9a34 60%,#fff3d6 82%,#ffe6a6 92%,#b78a2e 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; filter: drop-shadow(0 2px 4px rgba(0,0,0,.45)) drop-shadow(0 0 16px rgba(229,189,107,.3)); animation: renouveau-shine 3.6s ease-in-out infinite, renouveau-pop .7s cubic-bezier(.2,.9,.25,1.25) both; }
+    @keyframes renouveau-shine { 0%{background-position:220% 0,0 0}100%{background-position:-140% 0,0 0} }
+    @keyframes renouveau-pop { from{transform:scale(.9);filter:brightness(1.8) drop-shadow(0 2px 4px rgba(0,0,0,.45))}to{transform:scale(1);filter:brightness(1) drop-shadow(0 2px 4px rgba(0,0,0,.45))} }
     .hero h1 .type-cursor { display: inline-block; width: .06em; margin-left: .04em; color: var(--gold-light); font-weight: 300; animation: caret-blink 1s step-end infinite; }
     .hero h1.type-done .type-cursor { animation: none; opacity: 0; }
-    @keyframes caret-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    @media (prefers-reduced-motion: reduce) {
-      .hero h1.type-done .w-strong { animation: none; }
-    }
-    .hero-subtitle { margin: 26px 0 8px; color: var(--gold-light); font: italic 500 clamp(1.25rem, 2.6vw, 2rem) var(--serif); }
+    @keyframes caret-blink { 0%,100%{opacity:1}50%{opacity:0} }
+    .hero-subtitle { margin: 26px 0 8px; color: var(--gold-light); font: italic 500 clamp(1.25rem,2.6vw,2rem) var(--serif); }
     .hero-copy { max-width: 420px; margin: 0 0 34px; color: rgba(255,255,255,.82); font-size: 1.02rem; }
-    .hero-actions { display: flex; align-items: center; gap: 14px; }
-    .hero-actions .button { min-height: 56px; padding: 0 30px; border-radius: 999px; text-align: center; }
-    .hero-round { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: transparent; color: var(--white); font-size: 1.3rem; transition: background .2s ease, color .2s ease, transform .2s ease; }
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .hero-actions .button { min-height: 56px; padding: 0 30px; border-radius: 999px; }
+    .hero-round { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: transparent; color: var(--white); font-size: 1.3rem; transition: background .2s, color .2s, transform .2s; }
     .hero-round:hover { background: var(--white); color: var(--ink-deep); transform: translateY(-2px); }
     .scroll-note { display: none; position: absolute; right: 0; bottom: 100px; align-items: center; gap: 13px; color: rgba(255,255,255,.65); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
     .scroll-note::before { width: 1px; height: 54px; background: var(--gold); content: ''; }
-    .hero-wave { position: absolute; z-index: 2; right: 0; bottom: -1px; left: 0; line-height: 0; pointer-events: none; }
-    .hero-wave svg { display: block; width: 100%; height: clamp(48px, 7vw, 92px); }
-    .hero-wave-back { fill: var(--gold); opacity: .5; }
-    .hero-wave-front { fill: var(--gold); }
 
-    .quote-ribbon { width: 100%; overflow: hidden; padding: 28px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-light); }
-    .quote-track { width: max-content; transform: rotate(-1.5deg) scale(1.02); }
-    .quote-run { display: flex; width: max-content; animation: quote-scroll 30s linear infinite; }
-    .quote-ribbon p { margin: 0; padding: 0 34px; color: var(--ink); font: italic 500 clamp(1.45rem, 3vw, 2.5rem)/1.1 var(--serif); white-space: nowrap; }
-    @keyframes quote-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
+    /* ── POSITIONING ── */
     section { padding: 80px 0; }
     .positioning { position: relative; isolation: isolate; overflow: hidden; background: transparent; color: var(--white); }
     .positioning-video { position: absolute; z-index: 0; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px); object-fit: cover; background: url('bkg.jpeg') center/cover no-repeat; filter: blur(3px); opacity: .92; transform: scale(1.03); pointer-events: none; }
     .positioning::after { position: absolute; z-index: 1; inset: 0; background: rgba(9,29,49,.58); content: ''; pointer-events: none; }
     .positioning-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr; gap: 40px; }
-    .positioning-main, .positioning-secondary { min-width: 0; }
     .positioning-secondary { padding-top: 28px; border-top: 1px solid rgba(255,255,255,.32); }
     .positioning .section-intro { color: rgba(255,255,255,.82); }
     .positioning .arrow-link { color: var(--white); }
 
-    /* ==== Ruban de texte + galerie encadrée ==== */
+    /* ── MARQUEE ── */
     .marquee-ribbon { overflow: hidden; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-deep) url('bkgrbn.jpeg') center/cover; color: var(--white); }
     .marquee-track { display: flex; width: max-content; animation: marquee-scroll 26s linear infinite; }
-    .marquee-track span { display: inline-flex; align-items: center; padding: 0 28px; font: 500 clamp(1.1rem, 2.4vw, 1.7rem)/1 'Bodoni Moda', var(--serif); text-transform: uppercase; letter-spacing: .09em; white-space: nowrap; }
-    .marquee-track span::after { margin-left: 56px; font-family: 'Noto Music', var(--serif); font-size: 1.4em; line-height: 0; letter-spacing: 0; color: var(--gold-light); }
-    .marquee-track span:nth-child(odd)::after { content: '\01D11E'; }
-    .marquee-track span:nth-child(even)::after { content: '\01D122'; }
+    .marquee-track span { display: inline-flex; align-items: center; padding: 0 28px; font: 500 clamp(1.1rem,2.4vw,1.7rem)/1 var(--serif); text-transform: uppercase; letter-spacing: .09em; white-space: nowrap; }
+    .marquee-track span::after { margin-left: 56px; font-size: 1.4em; color: var(--gold-light); content: '𝄞'; }
+    .marquee-track span:nth-child(even)::after { content: '𝄢'; }
     .marquee-ribbon:hover .marquee-track { animation-play-state: paused; }
-    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marquee-scroll { from{transform:translateX(0)}to{transform:translateX(-50%)} }
 
+    /* ── GALERIE — OPTIMISÉE ── */
     .gallery { background: var(--paper); }
     .gallery-head { margin-bottom: 40px; }
-    .gallery-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 1fr); aspect-ratio: 1 / 1.35; gap: 8px; width: 100%; margin-left: 0; }
-    .mosaic-item { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
-    .mosaic-item img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82); transition: filter .4s ease, transform .6s ease; }
-    .mosaic-item:hover img { filter: saturate(1); transform: scale(1.05); }
+
+    .gallery-mosaic {
+      display: grid;
+      gap: 6px;
+      width: 100%;
+      /* Mobile : 2 colonnes, hauteurs fixes → zéro reflow */
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 180px 180px 180px 180px;
+    }
+
+    .mosaic-item {
+      position: relative;
+      overflow: hidden;
+      /* Placeholder sombre pendant le chargement → pas de blanc qui clignote */
+      background: #1e1a14;
+    }
+
+    .mosaic-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      /* SUPPRIMÉ : filter saturate permanent — coûteux GPU à chaque frame */
+      /* will-change uniquement sur transform → composité = rapide */
+      will-change: transform;
+      transition: transform .5s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    .mosaic-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Overlay sombre au hover au lieu du filter */
+    .mosaic-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(9,29,49,0);
+      transition: background .4s ease;
+      pointer-events: none;
+    }
+    .mosaic-item:hover::after {
+      background: rgba(9,29,49,.12);
+    }
+
+    /* Disposition mobile */
     .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
     .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; }
     .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; }
     .mosaic-item:nth-child(4) { grid-column: 1; grid-row: 3; }
-    .mosaic-item:nth-child(5) { grid-column: 1; grid-row: 4; }
-    .mosaic-item:nth-child(6) { grid-column: 2; grid-row: 3 / 5; }
-    @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-    }
+    .mosaic-item:nth-child(5) { grid-column: 2; grid-row: 3; }
+    .mosaic-item:nth-child(6) { grid-column: 1 / 3; grid-row: 4; }
+
+    /* Desktop */
     @media (min-width: 801px) {
-      .gallery-mosaic { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(170px, 1fr)); aspect-ratio: auto; gap: 12px; width: 100%; margin-left: 0; align-items: stretch; }
-      .mosaic-item { aspect-ratio: auto; }
-      .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; align-self: center; height: 72%; transform: none; }
-      .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; transform: none; }
-      .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; transform: none; }
-      .mosaic-item:nth-child(4) { grid-column: 3; grid-row: 1; transform: none; }
-      .mosaic-item:nth-child(5) { grid-column: 3; grid-row: 2; transform: none; }
-      .mosaic-item:nth-child(6) { grid-column: 4; grid-row: 1 / 3; align-self: center; height: 72%; transform: none; }
+      .gallery-mosaic {
+        grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+        grid-template-rows: 260px 260px;
+        gap: 8px;
+      }
+      .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
+      .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; }
+      .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; }
+      .mosaic-item:nth-child(4) { grid-column: 3; grid-row: 1; }
+      .mosaic-item:nth-child(5) { grid-column: 3; grid-row: 2; }
+      .mosaic-item:nth-child(6) { grid-column: 4; grid-row: 1 / 3; }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .mosaic-item img { will-change: auto; transition: none; }
+      .mosaic-item::after { transition: none; }
+    }
+
+    /* ── ÉVÉNEMENTS ── */
     .events { background: url('bkg.jpeg') center/cover fixed; color: var(--ink); }
     .events-head { display: block; margin-bottom: 34px; }
-    .events-title { margin: 0; color: var(--ink-deep); font: 600 clamp(2.8rem, 10vw, 5.4rem)/.92 var(--serif); letter-spacing: -.04em; text-shadow: 0 1px 0 rgba(255,255,255,.35); }
-    .events-desc { max-width: 480px; margin: 18px 0 0; color: var(--ink-deep); font: italic 600 clamp(1.15rem, 2.6vw, 1.55rem)/1.35 var(--serif); text-shadow: 0 1px 0 rgba(255,255,255,.3); }
-
+    .events-title { margin: 0; color: var(--ink-deep); font: 600 clamp(2.8rem,10vw,5.4rem)/.92 var(--serif); letter-spacing: -.04em; text-shadow: 0 1px 0 rgba(255,255,255,.35); }
+    .events-desc { max-width: 480px; margin: 18px 0 0; color: var(--ink-deep); font: italic 600 clamp(1.15rem,2.6vw,1.55rem)/1.35 var(--serif); text-shadow: 0 1px 0 rgba(255,255,255,.3); }
     .events-stage { position: relative; overflow: hidden; padding: 40px 20px 36px; background: var(--ink-deep); color: var(--white); }
     .events-stage-head { margin-bottom: 22px; }
     .events-stage-lead { max-width: 340px; margin: 0 0 16px; color: rgba(255,255,255,.6); font-size: .82rem; line-height: 1.55; }
-    .events-stage-title { margin: 0; font: 700 clamp(2.3rem, 11vw, 4rem)/.9 var(--sans); letter-spacing: -.02em; text-transform: uppercase; }
-
+    .events-stage-title { margin: 0; font: 700 clamp(2.3rem,11vw,4rem)/.9 var(--sans); letter-spacing: -.02em; text-transform: uppercase; }
     .event-fan { display: flex; justify-content: center; align-items: center; margin: 4px 0 30px; }
-    .event-poster { position: relative; flex: 0 0 auto; width: clamp(120px, 33vw, 200px); aspect-ratio: 3 / 4.2; padding: 0; border: 0; border-radius: 18px; overflow: hidden; background: #16203a; cursor: pointer; transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, opacity .4s ease; }
-    .event-poster-media { position: absolute; inset: 0; background: #16203a center/cover no-repeat; filter: saturate(.72) brightness(.8); transition: filter .5s ease, transform .6s ease; }
-    .event-poster::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,14,26,.9) 0%, rgba(6,14,26,.15) 52%); }
-    .event-poster-badge { position: absolute; z-index: 2; top: 12px; left: 50%; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.18); color: var(--white); font: 500 .58rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: 0; transition: opacity .3s ease; transform: translateX(-50%); }
+    .event-poster { position: relative; flex: 0 0 auto; width: clamp(120px,33vw,200px); aspect-ratio: 3/4.2; border: 0; border-radius: 18px; overflow: hidden; background: #16203a; cursor: pointer; transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .4s, opacity .4s; }
+    .event-poster-media { position: absolute; inset: 0; background: #16203a center/cover no-repeat; transition: transform .6s ease; }
+    .event-poster::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top,rgba(6,14,26,.9) 0%,rgba(6,14,26,.15) 52%); }
+    .event-poster-badge { position: absolute; z-index: 2; top: 12px; left: 50%; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.18); color: var(--white); font: 500 .58rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; opacity: 0; transition: opacity .3s; transform: translateX(-50%); }
     .event-poster-name { position: absolute; z-index: 2; right: 14px; bottom: 15px; left: 14px; color: var(--white); font: 500 1.1rem/1.12 var(--serif); text-align: left; }
-    .event-poster:hover .event-poster-media { filter: saturate(.95) brightness(.92); transform: scale(1.05); }
-    .event-poster:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+    .event-poster:hover .event-poster-media { transform: scale(1.05); }
     .event-poster[data-pos="left"] { transform: rotate(-8deg) translateY(16px) scale(.86); transform-origin: bottom right; margin-right: -28px; z-index: 1; }
     .event-poster[data-pos="right"] { transform: rotate(8deg) translateY(16px) scale(.86); transform-origin: bottom left; margin-left: -28px; z-index: 1; }
     .event-poster[data-pos="center"] { transform: translateY(-12px) scale(1.02); z-index: 3; box-shadow: 0 26px 48px rgba(0,0,0,.5); }
-    .event-poster[data-pos="center"] .event-poster-media { filter: saturate(1) brightness(.96); }
     .event-poster[data-pos="center"] .event-poster-badge { opacity: 1; }
-
     .event-caption { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.14); }
-    .event-caption-block { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .event-caption-block { display: flex; flex-direction: column; gap: 6px; }
     .event-caption-block--place { align-items: flex-end; text-align: right; }
-    .event-caption-label { color: var(--gold-light); font: 500 .58rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    .event-caption-label { color: var(--gold-light); font: 500 .58rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
     .event-caption-value { color: var(--white); font-size: .9rem; }
     .event-nav { display: flex; gap: 10px; }
-    .event-arrow { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: transparent; color: var(--white); cursor: pointer; font-size: 1.05rem; transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
+    .event-arrow { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: transparent; color: var(--white); cursor: pointer; font-size: 1.05rem; transition: background .2s, color .2s, border-color .2s, transform .2s; }
     .event-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--ink-deep); transform: translateY(-2px); }
-    .event-arrow:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
-    @media (prefers-reduced-motion: reduce) { .event-poster, .event-poster-media { transition: none; } }
-    .choir-ribbon { position: relative; z-index: 1; overflow: visible; padding: 0; background: transparent; }
-    .choir-track { display: flex; width: max-content; animation: choir-scroll 42s linear infinite; }
-    .choir-set { display: flex; gap: 0; padding-right: 0; }
-    .choir-photo { width: clamp(190px, 44vw, 360px); aspect-ratio: 1.45 / 1; overflow: hidden; margin: 0; border: 0; background: transparent; }
-    .choir-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter .3s ease, transform .5s ease; }
-    .choir-photo:hover img { filter: saturate(1); transform: scale(1.04); }
-    @keyframes choir-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
+    /* ── MANIFESTO ── */
+    .manifesto { background: var(--ink-deep) url('bkgrbn.jpeg') center/auto 100% no-repeat; color: var(--paper-light); }
+    .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
+    .manifesto-grid h1 { margin: 0; font: 800 clamp(2rem,5vw,3.4rem)/1.02 var(--sans); letter-spacing: .02em; text-transform: uppercase; text-shadow: 0 2px 20px rgba(0,0,0,.35); }
+    .manifesto-cards { display: grid; grid-template-columns: 1fr; gap: 22px; }
+    .manifesto-card { --card-bg: var(--white); position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; text-align: center; background: var(--card-bg); color: var(--ink); box-shadow: 0 8px 24px rgba(9,29,49,.10); transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s; }
+    .manifesto-card:hover { transform: translateY(-10px); box-shadow: 0 28px 54px rgba(9,29,49,.22); }
+    .manifesto-card--topo { --card-bg: #071726; color: var(--white); background: #04101b; }
+    .manifesto-card--topo::before { content: ""; position: absolute; inset: 0; z-index: 0; background: url('topo.svg') center/cover no-repeat; transform: scale(1.06); animation: topo-drift 26s ease-in-out infinite; }
+    .manifesto-card--topo.manifesto-card--flip::before { animation-name: topo-drift-flip; }
+    .manifesto-card--topo::after { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(120% 82% at 30% 28%,rgba(229,189,107,.12),transparent 62%); pointer-events: none; }
+    @keyframes topo-drift { 0%,100%{transform:scale(1.06) translate(0,0)}50%{transform:scale(1.06) translate(-2%,1.5%)} }
+    @keyframes topo-drift-flip { 0%,100%{transform:scaleX(-1) scale(1.06) translate(0,0)}50%{transform:scaleX(-1) scale(1.06) translate(-2%,1.5%)} }
+    .manifesto-card-image { position: relative; z-index: 1; width: 100%; aspect-ratio: 3/2; overflow: hidden; background: #d0c5ba; }
+    .manifesto-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.22,.61,.36,1); }
+    .manifesto-card:hover .manifesto-card-image img { transform: scale(1.07); }
+    .manifesto-card-wave { position: absolute; right: 0; bottom: -1px; left: 0; display: block; width: 100%; height: 34px; z-index: 1; }
+    .manifesto-card-wave path { fill: var(--card-bg); }
+    .manifesto-card-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 16px 26px 38px; }
+    .manifesto-card-title { margin: 0; font: 700 1.4rem var(--sans); letter-spacing: .1em; text-transform: uppercase; line-height: 1.12; }
+    .manifesto-card-title::after { content: ""; display: block; width: 26px; height: 2px; margin: 12px auto 0; border-radius: 2px; background: var(--gold); opacity: .8; transition: width .4s cubic-bezier(.22,.61,.36,1), opacity .4s; }
+    .manifesto-card:hover .manifesto-card-title::after { width: 54px; opacity: 1; }
+    .manifesto-card--topo .manifesto-card-title { color: var(--gold-light); text-shadow: 0 2px 14px rgba(0,0,0,.55); }
+    .manifesto-card--topo .manifesto-card-title::after { background: var(--gold-light); }
+    .manifesto-card-text { margin: 0; font-size: .92rem; line-height: 1.65; opacity: .82; }
+    .manifesto-card--topo .manifesto-card-text { opacity: .9; text-shadow: 0 1px 10px rgba(0,0,0,.5); }
+
+    /* ── PARTENAIRES ── */
     .partners { overflow: hidden; padding: 100px 0 110px; background: var(--paper-light); }
     .partners-head { display: block; gap: 30px; margin-bottom: 48px; }
     .partners-head .arrow-link { margin-top: 20px; }
-    .partners-head .section-intro { margin-top: 16px; }
     .partner-ribbon { display: flex; width: 100%; margin-top: 48px; overflow: hidden; }
     .partner-line { display: flex; width: max-content; animation: partner-scroll 34s linear infinite; }
     .partner-set { display: flex; gap: 12px; padding-right: 12px; }
-    .partner-card { display: block; width: clamp(110px, 38vw, 150px); aspect-ratio: 1; flex: 0 0 auto; overflow: hidden; background: var(--white); }
+    .partner-card { display: block; width: clamp(110px,38vw,150px); aspect-ratio: 1; flex: 0 0 auto; overflow: hidden; background: var(--white); }
     .partner-card img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
     .partners:hover .partner-line { animation-play-state: paused; }
-    @keyframes partner-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    @keyframes partner-scroll { from{transform:translateX(0)}to{transform:translateX(-50%)} }
 
-    .manifesto { background: var(--ink-deep) url('bkgrbn.jpeg') center / auto 100% no-repeat; color: var(--paper-light); }
-    .manifesto-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; margin-bottom: 60px; }
-    .manifesto .section-title { font-size: clamp(2rem, 4vw, 3.7rem); }
-    .manifesto-grid h1 { margin: 0; font: 800 clamp(2rem, 5vw, 3.4rem)/1.02 var(--sans); letter-spacing: .02em; text-transform: uppercase; text-shadow: 0 2px 20px rgba(0,0,0,.35); }
-
-    .manifesto-cards { display: grid; grid-template-columns: 1fr; gap: 22px; }
-    .manifesto-card { --card-bg: var(--white); position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; text-align: center; background: var(--card-bg); color: var(--ink); box-shadow: 0 8px 24px rgba(9,29,49,.10); transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s ease; }
-    .manifesto-card:hover { transform: translateY(-10px); box-shadow: 0 28px 54px rgba(9,29,49,.22); }
-    .manifesto-card--blue { --card-bg: var(--ink-deep); color: var(--white); }
-    .manifesto-card--gold { --card-bg: var(--gold); color: var(--ink-deep); }
-    .manifesto-card--white { --card-bg: var(--white); color: var(--ink); }
-
-    /* Motif topographique — cards 2 & 4 */
-    .manifesto-card--topo { --card-bg: #071726; color: var(--white); background: #04101b; }
-    .manifesto-card--topo::before { content: ""; position: absolute; inset: 0; z-index: 0; background: url('topo.svg') center/cover no-repeat; transform: scale(1.06); animation: topo-drift 26s ease-in-out infinite; will-change: transform; }
-    .manifesto-card--topo.manifesto-card--flip::before { animation-name: topo-drift-flip; }
-    .manifesto-card--topo::after { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(120% 82% at 30% 28%, rgba(229,189,107,.12), transparent 62%); pointer-events: none; }
-    .manifesto-card--topo:hover { box-shadow: 0 28px 56px rgba(4,16,27,.5), 0 0 0 1px rgba(229,189,107,.28); }
-
-    .manifesto-card-image { position: relative; z-index: 1; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; background: #d0c5ba; }
-    .manifesto-card-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter .5s ease, transform .6s cubic-bezier(.22,.61,.36,1); }
-    .manifesto-card:hover .manifesto-card-image img { filter: saturate(1.05); transform: scale(1.07); }
-    .manifesto-card--topo .manifesto-card-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,16,27,0) 45%, rgba(4,16,27,.5)); }
-    .manifesto-card-wave { position: absolute; right: 0; bottom: -1px; left: 0; display: block; width: 100%; height: 34px; z-index: 1; }
-    .manifesto-card-wave path { fill: var(--card-bg); }
-
-    .manifesto-card-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 16px 26px 38px; }
-    .manifesto-card-index { font: 500 .62rem/1 var(--mono); letter-spacing: .24em; color: var(--gold); opacity: .9; }
-    .manifesto-card-title { position: relative; margin: 0; font: 700 1.4rem var(--sans); letter-spacing: .1em; text-transform: uppercase; line-height: 1.12; color: inherit; }
-    .manifesto-card-title::after { content: ""; display: block; width: 26px; height: 2px; margin: 12px auto 0; border-radius: 2px; background: var(--gold); opacity: .8; transition: width .4s cubic-bezier(.22,.61,.36,1), opacity .4s ease; }
-    .manifesto-card:hover .manifesto-card-title::after { width: 54px; opacity: 1; }
-    .manifesto-card--blue .manifesto-card-title, .manifesto-card--topo .manifesto-card-title { color: var(--gold-light); }
-    .manifesto-card--blue .manifesto-card-title::after, .manifesto-card--topo .manifesto-card-title::after { background: var(--gold-light); }
-    .manifesto-card--topo .manifesto-card-title { text-shadow: 0 2px 14px rgba(0,0,0,.55); }
-    .manifesto-card-text { margin: 0; font-size: .92rem; line-height: 1.65; color: inherit; opacity: .82; }
-    .manifesto-card--topo .manifesto-card-text { opacity: .9; text-shadow: 0 1px 10px rgba(0,0,0,.5); }
-
-    @keyframes topo-drift { 0%, 100% { transform: scale(1.06) translate(0, 0); } 50% { transform: scale(1.06) translate(-2%, 1.5%); } }
-    @keyframes topo-drift-flip { 0%, 100% { transform: scaleX(-1) scale(1.06) translate(0, 0); } 50% { transform: scaleX(-1) scale(1.06) translate(-2%, 1.5%); } }
-
-    @media (min-width: 520px) {
-      .manifesto-cards { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-      .manifesto-card-title { font-size: 1.25rem; }
-      .partner-set { gap: 18px; padding-right: 18px; }
-      .partner-card { width: 28vw; }
-      .partner-card img { padding: 20px; }
-    }
-
-    @media (min-width: 801px) {
-      .partner-ribbon { gap: 24px; }
-      .partner-set { gap: 24px; padding-right: 24px; }
-      .partner-card { width: 10cm; }
-      .partner-card img { padding: 24px; }
-      .manifesto { background-size: 100% 100%; }
-      .manifesto-cards { grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: stretch; }
-      .manifesto-card-content { padding: 14px 20px 32px; }
-      .manifesto-card-image { aspect-ratio: 4 / 3; }
-      .manifesto-card-title { font-size: 1.2rem; }
-    }
-
+    /* ── CONTACT ── */
     .contact { background: var(--paper-light); }
     .contact-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
     .contact-form { display: grid; gap: 16px; margin-top: 12px; }
-    label { display: grid; gap: 7px; color: var(--ink); font: 500 .66rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    label { display: grid; gap: 7px; color: var(--ink); font: 500 .66rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
     input, select, textarea { width: 100%; padding: 14px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; outline: 0; background: transparent; color: var(--ink); }
     textarea { min-height: 100px; resize: vertical; }
     input:focus, select:focus, textarea:focus { border-color: var(--gold); }
     .contact-form .button { justify-self: start; margin-top: 10px; }
     .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-    .contact-social { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 14px; border: 1px solid var(--line); color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: border-color .2s ease, color .2s ease, transform .2s ease; }
+    .contact-social { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 14px; border: 1px solid var(--line); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: border-color .2s, color .2s, transform .2s; }
     .contact-social:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
     .contact-social svg { width: 19px; height: 19px; fill: currentColor; }
     .contact-social--phone svg { fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+    /* ── GALERIE CONTACT — remplace Unsplash ── */
     .contact-gallery { display: grid; grid-template-columns: .82fr 1fr .82fr; align-items: center; gap: 8px; }
-    .contact-gallery figure { min-width: 0; aspect-ratio: 3 / 4; overflow: hidden; margin: 0; background: #d9d0c2; }
-    .contact-gallery figure:nth-child(2) { aspect-ratio: 3 / 5; }
-    .contact-gallery img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72); transition: filter .3s ease, transform .5s ease; }
-    .contact-gallery figure:hover img { filter: saturate(1); transform: scale(1.04); }
+    .contact-gallery figure { min-width: 0; aspect-ratio: 3/4; overflow: hidden; margin: 0; background: #1e1a14; }
+    .contact-gallery figure:nth-child(2) { aspect-ratio: 3/5; }
+    .contact-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .contact-gallery figure:hover img { transform: scale(1.04); }
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .partner-line, .choir-track, .quote-run { animation: none; }
-      .event-carousel { scroll-behavior: auto; }
-    }
-
+    /* ── FOOTER ── */
     footer { padding: 70px 0 25px; background: var(--ink-deep); color: var(--white); }
     .footer-top { display: grid; grid-template-columns: 1fr; gap: 35px; padding-bottom: 45px; }
     .footer-brand { display: flex; align-items: center; gap: 15px; font: 500 2rem var(--serif); }
@@ -313,75 +304,71 @@
     .footer-heading { margin: 0 0 18px; color: var(--gold-light); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .footer-links { display: grid; gap: 8px; color: rgba(255,255,255,.72); font-size: .85rem; }
     .newsletter { display: flex; border-bottom: 1px solid rgba(255,255,255,.35); }
-    .newsletter input { border: 0; color: var(--white); }
+    .newsletter input { border: 0; color: var(--white); background: transparent; padding: 12px 0; flex: 1; }
     .newsletter button { border: 0; background: none; color: var(--gold-light); cursor: pointer; font-size: 1.2rem; }
     .footer-bottom { display: grid; gap: 8px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.42); font-size: .65rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-    /* ==== Scroll reveal effects ==== */
-    [data-reveal] { opacity: 0; transform: translateY(38px); transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1); transition-delay: var(--reveal-delay, 0ms); will-change: opacity, transform; }
+    /* ── SCROLL REVEAL ── */
+    [data-reveal] { opacity: 0; transform: translateY(38px); transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1); transition-delay: var(--reveal-delay,0ms); will-change: opacity, transform; }
     [data-reveal="fade"] { transform: none; }
     [data-reveal="scale"] { transform: translateY(38px) scale(.94); }
     [data-reveal].is-visible { opacity: 1; transform: none; }
-
-    /* Masked title reveal */
-    [data-reveal-title] { position: relative; }
     [data-reveal-title] > span { display: inline-block; transform: translateY(105%); opacity: 0; transition: transform 1s cubic-bezier(.19,1,.22,1), opacity 1s ease; }
     [data-reveal-title].is-visible > span { transform: translateY(0); opacity: 1; }
 
-    /* Hero parallax layers */
-    .hero::before { will-change: transform; }
-    .hero-content { will-change: transform; }
-
-    @media (prefers-reduced-motion: reduce) {
-      [data-reveal], [data-reveal-title] > span { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .manifesto-card--topo::before { animation: none; transform: scale(1.06); }
-      .manifesto-card--topo.manifesto-card--flip::before { transform: scaleX(-1) scale(1.06); }
-    }
-
+    /* ── RESPONSIVE ── */
     @media (min-width: 801px) {
       .wrap { width: min(1180px, calc(100% - 48px)); }
-      html { scroll-padding-top: 90px; }
-      section, .quote-ribbon, footer { scroll-margin-top: 90px; }
       .nav { min-height: 90px; }
-      .nav-links { position: static; display: flex; align-items: center; gap: clamp(18px, 3vw, 38px); padding: 0; background: none; flex-direction: row; }
+      .nav-links { position: static; display: flex; align-items: center; gap: clamp(18px,3vw,38px); padding: 0; background: none; flex-direction: row; }
       .nav-links.is-open { display: flex; }
       .nav-action { display: inline-flex; align-items: center; }
       .menu-toggle { display: none; }
       .hero { min-height: 760px; }
       .hero-content { width: calc(100% - 40px); margin-left: 40px; padding: 150px 0 120px; }
       .scroll-note { display: flex; }
-      .hero-actions { flex-wrap: wrap; }
-      .hero-actions .button { width: auto; }
       section { padding: 120px 0; }
-      .positioning-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 80px; align-items: start; }
+      .positioning-grid { grid-template-columns: 1fr 1fr; gap: 80px; }
       .positioning-main { grid-column: 2; grid-row: 1; }
-      .positioning-secondary { grid-column: 1; grid-row: 2; padding-top: 28px; }
-      .partners-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
-      .partners-head .arrow-link { margin-top: 30px; }
-      .events-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 60px; margin-bottom: 34px; }
-      .events-desc { margin-top: 10px; font-size: 1.4rem; }
-      .events-stage { padding: 54px 50px 48px;  }
+      .positioning-secondary { grid-column: 1; grid-row: 2; }
+      .events-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 60px; }
+      .events-stage { padding: 54px 50px 48px; }
       .events-stage-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; margin-bottom: 8px; }
-      .events-stage-lead { margin: 0; max-width: 300px; }
-      .events-stage-title { font-size: clamp(3.5rem, 6vw, 5.5rem); }
       .event-fan { margin: 10px 0 40px; }
-      .event-poster { width: clamp(200px, 18vw, 244px); }
-      .event-poster[data-pos="left"] { margin-right: -22px; }
-      .event-poster[data-pos="right"] { margin-left: -22px; }
-      .event-caption { gap: 24px; padding-top: 28px; }
-      .event-caption-value { font-size: 1rem; }
+      .event-poster { width: clamp(200px,18vw,244px); }
       .manifesto-grid { grid-template-columns: .8fr 1.5fr; gap: 80px; }
-      .pillars { grid-template-columns: repeat(4, 1fr); margin-top: 75px; }
-      .pillar:nth-child(2) { border-right: 1px solid rgba(9,29,49,.25); }
-      .pillar:nth-child(3), .pillar:nth-child(4) { border-top: 0; }
-      .pillar:nth-child(3) { padding-left: 20px; }
+      .manifesto-cards { grid-template-columns: repeat(4,1fr); gap: 18px; align-items: stretch; }
+      .manifesto-card-image { aspect-ratio: 4/3; }
+      .manifesto-card-content { padding: 14px 20px 32px; }
+      .manifesto-card-title { font-size: 1.2rem; }
+      .partners-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+      .partner-card { width: 10cm; }
+      .partner-card img { padding: 24px; }
       .contact-grid { grid-template-columns: 1fr 1fr; gap: 100px; }
       .footer-top { grid-template-columns: 1.4fr 1fr 1fr; gap: 50px; padding-bottom: 70px; }
-      .footer-bottom { display: flex; justify-content: space-between; gap: 20px; }
+      .footer-bottom { display: flex; justify-content: space-between; }
+    }
+
+    @media (min-width: 520px) {
+      .manifesto-cards { grid-template-columns: repeat(2,1fr); gap: 18px; }
+      .partner-set { gap: 18px; padding-right: 18px; }
+      .partner-card { width: 28vw; }
+      .partner-card img { padding: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .marquee-track, .partner-line { animation: none; }
+      [data-reveal], [data-reveal-title] > span { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .manifesto-card--topo::before { animation: none; transform: scale(1.06); }
+      .manifesto-card--topo.manifesto-card--flip::before { transform: scaleX(-1) scale(1.06); }
+      .hero h1.type-done .w-strong { animation: none; }
     }
   </style>
 </head>
 <body class="preloading">
+
   <div id="preloader" role="status" aria-label="Chargement d'ALTO">
     <picture>
       <source srcset="logo-loader.webp" type="image/webp">
@@ -391,10 +378,12 @@
 
   <header class="site-header">
     <nav class="nav wrap" aria-label="Navigation principale">
-      <a class="brand" href="#accueil" aria-label="ALTO, accueil"><img src="logo-mark.png" alt="" width="36" height="36" decoding="async">ALTO</a>
+      <a class="brand" href="#accueil" aria-label="ALTO, accueil">
+        <img src="logo-mark.png" alt="" width="36" height="36" decoding="async">ALTO
+      </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Ouvrir le menu">☰</button>
       <div class="nav-links" id="main-menu">
-        <a href="#programmation">Évenements</a>
+        <a href="#programmation">Événements</a>
         <a href="#galerie">Galerie</a>
         <a href="#partenaires">Partenaires</a>
         <a href="#vision">À propos</a>
@@ -405,10 +394,15 @@
   </header>
 
   <main>
+
+    <!-- HERO -->
     <section class="hero" id="accueil" aria-labelledby="hero-title">
       <div class="wrap hero-content">
-        <p class="eyebrow">Scène lyrique & chorale</p>
-        <h1 id="hero-title" aria-label="L'écho d'un renouveau"><span class="type-text" aria-hidden="true"></span><span class="type-cursor" aria-hidden="true">|</span></h1>
+        <p class="eyebrow">Scène lyrique &amp; chorale</p>
+        <h1 id="hero-title" aria-label="L'écho d'un renouveau">
+          <span class="type-text" aria-hidden="true"></span>
+          <span class="type-cursor" aria-hidden="true">|</span>
+        </h1>
         <p class="hero-subtitle">Faire vibrer les voix.</p>
         <p class="hero-copy">La scène lyrique et chorale entre dans une nouvelle ère.</p>
         <div class="hero-actions">
@@ -416,31 +410,16 @@
           <a class="hero-round" href="#programmation" aria-label="Voir la programmation">→</a>
         </div>
       </div>
-      <span class="scroll-note">Faire vibrer les voix</span>
-      <!-- <div class="hero-wave" aria-hidden="true">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-          <path class="hero-wave-back" d="M0,60 C240,120 420,20 720,56 C1000,92 1200,26 1440,64 L1440,120 L0,120 Z"/>
-          <path class="hero-wave-front" d="M0,84 C260,44 520,104 780,80 C1040,58 1260,98 1440,76 L1440,120 L0,120 Z"/>
-        </svg>
-      </div> -->
+      <span class="scroll-note" aria-hidden="true">Faire vibrer les voix</span>
     </section>
 
-    <!-- <div class="quote-ribbon" role="note" aria-label="Citation ALTO">
-      <div class="quote-track">
-        <div class="quote-run">
-          <p>« Lorsque les voix se rencontrent, un espace nouveau apparaît. »</p>
-          <p aria-hidden="true">« Lorsque les voix se rencontrent, un espace nouveau apparaît. »</p>
-        </div>
-      </div>
-    </div> -->
-
+    <!-- VISION -->
     <section class="positioning" id="vision" aria-labelledby="positioning-title">
       <video class="positioning-video" muted loop playsinline preload="none" poster="bkg.jpeg" aria-hidden="true">
         <source src="animation.mp4" type="video/mp4">
       </video>
       <div class="wrap positioning-grid">
         <div class="positioning-main">
-          <!-- <p class="eyebrow">01 / Le positionnement</p> -->
           <h2 class="section-title" id="positioning-title" data-reveal-title><span>L'écho d'un renouveau</span></h2>
           <p class="section-intro" data-reveal style="--reveal-delay:120ms">ALTO accompagne la renaissance lyrique avec une conviction simple : lorsque les voix se rencontrent, elles ouvrent un espace nouveau.</p>
         </div>
@@ -451,24 +430,78 @@
       </div>
     </section>
 
-    
-
+    <!-- GALERIE OPTIMISÉE -->
     <section class="gallery" id="galerie" aria-labelledby="gallery-title">
       <div class="wrap">
         <div class="gallery-head">
           <h2 class="section-title" id="gallery-title" data-reveal-title><span>ALTO en images</span></h2>
-          <p class="section-intro" data-reveal style="--reveal-delay:120ms">Des instants suspendus, saisis au fil des rencontres et des concerts — chaque cadre s'anime tour à tour.</p>
+          <p class="section-intro" data-reveal style="--reveal-delay:120ms">Des instants suspendus, saisis au fil des rencontres et des concerts.</p>
         </div>
+
         <div class="gallery-mosaic" data-reveal="fade">
-          <figure class="mosaic-item"><img src="./image/Choir-054.webp" alt="Choeur en concert" loading="lazy" decoding="async"></figure>
-          <figure class="mosaic-item"><img src="./image/Choir-056.webp" alt="Chanteuse face au public" loading="lazy" decoding="async"></figure>
-          <figure class="mosaic-item"><img src="./image/Choir-058.webp" alt="Répétition en groupe" loading="lazy" decoding="async"></figure>
-          <figure class="mosaic-item"><img src="./image/Choir-062.webp" alt="Portrait d'une chanteuse" loading="lazy" decoding="async"></figure>
-          <figure class="mosaic-item"><img src="./image/Choir-064.webp" alt="Musiciens en scène" loading="lazy" decoding="async"></figure>
-          <figure class="mosaic-item"><img src="./image/Choir-069.webp" alt="Portrait d'une musicienne" loading="lazy" decoding="async"></figure>
+          <!-- item 1 : large gauche — priorité haute, visible au-dessus du fold -->
+          <figure class="mosaic-item">
+            <img
+              src="./image/Choir-054.webp"
+              alt="Chœur en concert"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width:800px) 50vw, 30vw"
+            >
+          </figure>
+          <!-- items 2-3 : colonne droite haute -->
+          <figure class="mosaic-item">
+            <img
+              src="./image/Choir-056.webp"
+              alt="Artiste en interprétation"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width:800px) 50vw, 20vw"
+            >
+          </figure>
+          <figure class="mosaic-item">
+            <img
+              src="./image/Choir-058.webp"
+              alt="Répétition du chœur"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width:800px) 50vw, 20vw"
+            >
+          </figure>
+          <!-- items 4-5 : colonne centrale basse -->
+          <figure class="mosaic-item">
+            <img
+              src="./image/Choir-062.webp"
+              alt="Ensemble vocal ALTO"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width:800px) 50vw, 20vw"
+            >
+          </figure>
+          <figure class="mosaic-item">
+            <img
+              src="./image/Choir-064.webp"
+              alt="Moment de concert"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width:800px) 50vw, 20vw"
+            >
+          </figure>
+          <!-- item 6 : large droite -->
+          <figure class="mosaic-item">
+            <img
+              src="./image/Choir-069.webp"
+              alt="Portrait d'artiste ALTO"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width:800px) 100vw, 30vw"
+            >
+          </figure>
         </div>
       </div>
     </section>
+
+    <!-- MARQUEE -->
     <div class="marquee-ribbon" role="note" aria-label="Mots ALTO">
       <div class="marquee-track" aria-hidden="true">
         <span>Écouter</span><span>Rencontrer</span><span>Créer</span><span>Transmettre</span><span>Résonner</span><span>Rassembler</span>
@@ -476,13 +509,13 @@
       </div>
     </div>
 
+    <!-- ÉVÉNEMENTS -->
     <section class="events" id="programmation" aria-labelledby="events-title">
       <div class="wrap">
         <div class="events-head">
           <h2 class="events-title" id="events-title" data-reveal-title><span>À l'affiche</span></h2>
-          <p class="events-desc" data-reveal style="--reveal-delay:120ms">Les évenements d'ALTO , des créations chorales pensées comme des expériences vivantes, uniques comme les voix qui les portent.</p>
+          <p class="events-desc" data-reveal style="--reveal-delay:120ms">Les événements d'ALTO — des créations chorales pensées comme des expériences vivantes.</p>
         </div>
-
         <div class="events-stage" data-reveal="scale" style="--reveal-delay:80ms">
           <div class="event-fan" role="group" aria-label="Affiches des prochains événements">
             <button class="event-poster" type="button" data-pos="left" aria-label="Événement précédent">
@@ -501,10 +534,9 @@
               <span class="event-poster-name">Écouter autrement</span>
             </button>
           </div>
-
           <div class="event-caption">
-            <div class="event-caption-block event-caption-block--date">
-              <span class="event-caption-label">Date & heure</span>
+            <div class="event-caption-block">
+              <span class="event-caption-label">Date &amp; heure</span>
               <span class="event-caption-value" data-field="date">14 octobre 2026 · 20h00</span>
             </div>
             <div class="event-nav">
@@ -520,77 +552,65 @@
       </div>
     </section>
 
-    <!-- <section class="choir-ribbon" aria-label="Photographies des choeurs">
-      <div class="choir-track">
-        <div class="choir-set">
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85" alt="Choeur en concert" loading="lazy" decoding="async"></figure>
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=900&q=85" alt="Chanteurs réunis sur scène" loading="lazy" decoding="async"></figure>
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="Voix chorales face au public" loading="lazy" decoding="async"></figure>
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85" alt="Musiciens et choristes en répétition" loading="lazy" decoding="async"></figure>
-        </div>
-        <div class="choir-set" aria-hidden="true">
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy" decoding="async"></figure>
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy" decoding="async"></figure>
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy" decoding="async"></figure>
-          <figure class="choir-photo"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85" alt="" loading="lazy" decoding="async"></figure>
-        </div>
-      </div>
-
-    </section> -->
-
-    
-
+    <!-- VISIONS -->
     <section class="manifesto" id="manifeste" aria-labelledby="manifesto-title">
       <div class="wrap">
         <div class="manifesto-grid">
-          <h1 data-reveal-title><span>NOS VISIONS : </span></h1>
-          <!-- <div><p class="eyebrow">04 / Le mouvement</p><h2 class="section-title" id="manifesto-title">Créer l'espace pour que la voix advienne.</h2></div> -->
+          <h1 data-reveal-title><span>NOS VISIONS</span></h1>
         </div>
         <div class="manifesto-cards">
           <article class="manifesto-card manifesto-card--white" data-reveal="scale" style="--reveal-delay:0ms">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85" alt="Écouter ensemble" loading="lazy" decoding="async"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
+            <div class="manifesto-card-image">
+              <img src="./image/Choir-056.webp" alt="Écouter ensemble" loading="lazy" decoding="async">
+              <svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg>
+            </div>
             <div class="manifesto-card-content">
-              <!-- <span class="manifesto-card-index">01</span> -->
               <h3 class="manifesto-card-title">Écouter</h3>
               <p class="manifesto-card-text">Créer un espace d'accueil et de reconnaissance pour chaque voix, chaque histoire, chaque perspective unique.</p>
             </div>
           </article>
 
           <article class="manifesto-card manifesto-card--topo" data-reveal="scale" style="--reveal-delay:120ms">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=85" alt="Rencontrer les artistes" loading="lazy" decoding="async"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
+            <div class="manifesto-card-image">
+              <img src="./image/Choir-058.webp" alt="Rencontrer les artistes" loading="lazy" decoding="async">
+              <svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg>
+            </div>
             <div class="manifesto-card-content">
-              <!-- <span class="manifesto-card-index">02</span> -->
               <h3 class="manifesto-card-title">Rencontrer</h3>
               <p class="manifesto-card-text">Favoriser les rencontres authentiques qui déplacent les lignes et créent des connexions durables.</p>
             </div>
           </article>
 
           <article class="manifesto-card manifesto-card--white" data-reveal="scale" style="--reveal-delay:240ms">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=700&q=85" alt="Créer la musique" loading="lazy" decoding="async"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
+            <div class="manifesto-card-image">
+              <img src="./image/Choir-062.webp" alt="Créer la musique" loading="lazy" decoding="async">
+              <svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg>
+            </div>
             <div class="manifesto-card-content">
-              <!-- <span class="manifesto-card-index">03</span> -->
               <h3 class="manifesto-card-title">Créer</h3>
               <p class="manifesto-card-text">Donner naissance à une musique nouvelle, portée par la puissance du collectif et l'audace.</p>
             </div>
           </article>
 
           <article class="manifesto-card manifesto-card--topo manifesto-card--flip" data-reveal="scale" style="--reveal-delay:360ms">
-            <div class="manifesto-card-image"><img src="https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=700&q=85" alt="Apprendre ensemble" loading="lazy" decoding="async"><svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg></div>
+            <div class="manifesto-card-image">
+              <img src="./image/Choir-064.webp" alt="Apprendre ensemble" loading="lazy" decoding="async">
+              <svg class="manifesto-card-wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C70,40 130,6 210,18 C280,29 340,10 400,22 L400,40 L0,40 Z"/></svg>
+            </div>
             <div class="manifesto-card-content">
-              <!-- <span class="manifesto-card-index">04</span> -->
               <h3 class="manifesto-card-title">Apprendre</h3>
               <p class="manifesto-card-text">Transmettre les savoirs et les techniques pour permettre à chacun de se réinventer et d'évoluer.</p>
             </div>
           </article>
-
         </div>
       </div>
     </section>
+
+    <!-- PARTENAIRES -->
     <section class="partners" id="partenaires" aria-labelledby="partners-title">
       <div class="wrap">
         <div class="partners-head">
           <div>
-            <!-- <p class="eyebrow">03 / Partenaires & soutiens</p> -->
             <h2 class="section-title" id="partners-title" data-reveal-title><span>Nos partenaires</span></h2>
             <p class="section-intro" data-reveal style="--reveal-delay:120ms">Des partenaires engagés pour faire circuler les voix, les idées et les rencontres.</p>
           </div>
@@ -600,70 +620,107 @@
       <div class="partner-ribbon" aria-label="Nos partenaires">
         <div class="partner-line">
           <div class="partner-set">
-            <div class="partner-card"><img src="partenaires/duau.png" alt="Logo duau" loading="lazy" decoding="async"></div>
-            <div class="partner-card"><img src="partenaires/ducasse.jpeg" alt="ducasse" loading="lazy" decoding="async"></div>
-            <div class="partner-card"><img src="partenaires/wmusic.jpeg" alt="wmusic" loading="lazy" decoding="async"></div>
-            <!-- <div class="partner-card"><img src="partenaires/yas.png" alt="Logo Yas" loading="lazy" decoding="async"></div> -->
+            <div class="partner-card"><img src="partenaires/duau.png" alt="Logo Duau" loading="lazy" decoding="async"></div>
+            <div class="partner-card"><img src="partenaires/ducasse.jpeg" alt="Ducasse" loading="lazy" decoding="async"></div>
+            <div class="partner-card"><img src="partenaires/wmusic.jpeg" alt="WMusic" loading="lazy" decoding="async"></div>
           </div>
           <div class="partner-set" aria-hidden="true">
             <div class="partner-card"><img src="partenaires/duau.png" alt="" loading="lazy" decoding="async"></div>
             <div class="partner-card"><img src="partenaires/ducasse.jpeg" alt="" loading="lazy" decoding="async"></div>
             <div class="partner-card"><img src="partenaires/wmusic.jpeg" alt="" loading="lazy" decoding="async"></div>
-            <!-- <div class="partner-card"><img src="partenaires/yas.png" alt="" loading="lazy" decoding="async"></div> -->
           </div>
         </div>
       </div>
     </section>
+
+    <!-- CONTACT -->
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-grid">
         <div>
-          <!-- <p class="eyebrow" data-reveal>05 / Contact</p> -->
           <h2 class="section-title" id="contact-title" data-reveal-title><span>Rejoindre le mouvement</span></h2>
           <p class="section-intro" data-reveal style="--reveal-delay:120ms">Artiste, mécène, partenaire ou spectateur : écrivez-nous et faisons résonner la suite.</p>
           <form class="contact-form" action="#contact" method="post">
             <label>Nom <input type="text" name="nom" autocomplete="name" required></label>
             <label>Email <input type="email" name="email" autocomplete="email" required></label>
-            <label>Sujet <select name="sujet"><option>Partenariat</option><option>Artiste</option><option>Autre</option></select></label>
+            <label>Sujet
+              <select name="sujet">
+                <option>Partenariat</option>
+                <option>Artiste</option>
+                <option>Autre</option>
+              </select>
+            </label>
             <label>Message <textarea name="message" required></textarea></label>
             <button class="button" type="submit">Envoyer le message</button>
           </form>
-          <div class="contact-links" aria-label="Nous contacter sur nos canaux directs">
-            <a class="contact-social contact-social--phone" href="tel:+33100000000" aria-label="Appeler ALTO au 01 00 00 00 00">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5 9.2 3l2 4.7-1.8 1.5a15.3 15.3 0 0 0 5.4 5.4l1.5-1.8 4.7 2-.5 2.6a2 2 0 0 1-2.2 1.6C10.6 18.1 5.9 13.4 5 5.7A2 2 0 0 1 6.6 3.5Z" /></svg>
+          <div class="contact-links">
+            <a class="contact-social contact-social--phone" href="tel:+33100000000" aria-label="Appeler ALTO">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5 9.2 3l2 4.7-1.8 1.5a15.3 15.3 0 0 0 5.4 5.4l1.5-1.8 4.7 2-.5 2.6a2 2 0 0 1-2.2 1.6C10.6 18.1 5.9 13.4 5 5.7A2 2 0 0 1 6.6 3.5Z"/></svg>
               <span>Téléphone</span>
             </a>
-            <a class="contact-social" href="https://www.facebook.com/alto" target="_blank" rel="noreferrer" aria-label="Retrouver ALTO sur Facebook">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V4a22 22 0 0 0-2.4-.1c-2.4 0-4 1.5-4 4.1V10H8v3h2.4v8h3.1Z" /></svg>
+            <a class="contact-social" href="https://www.facebook.com/alto" target="_blank" rel="noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V4a22 22 0 0 0-2.4-.1c-2.4 0-4 1.5-4 4.1V10H8v3h2.4v8h3.1Z"/></svg>
               <span>Facebook</span>
             </a>
-            <a class="contact-social" href="https://www.instagram.com/alto" target="_blank" rel="noreferrer" aria-label="Retrouver ALTO sur Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.3 3h9.4A4.3 4.3 0 0 1 21 7.3v9.4a4.3 4.3 0 0 1-4.3 4.3H7.3A4.3 4.3 0 0 1 3 16.7V7.3A4.3 4.3 0 0 1 7.3 3Zm0 2A2.3 2.3 0 0 0 5 7.3v9.4A2.3 2.3 0 0 0 7.3 19h9.4a2.3 2.3 0 0 0 2.3-2.3V7.3A2.3 2.3 0 0 0 16.7 5H7.3Zm9.9 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7.8a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm0 2a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4Z" /></svg>
+            <a class="contact-social" href="https://www.instagram.com/alto" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.3 3h9.4A4.3 4.3 0 0 1 21 7.3v9.4a4.3 4.3 0 0 1-4.3 4.3H7.3A4.3 4.3 0 0 1 3 16.7V7.3A4.3 4.3 0 0 1 7.3 3Zm0 2A2.3 2.3 0 0 0 5 7.3v9.4A2.3 2.3 0 0 0 7.3 19h9.4a2.3 2.3 0 0 0 2.3-2.3V7.3A2.3 2.3 0 0 0 16.7 5H7.3Zm9.9 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7.8a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm0 2a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4Z"/></svg>
               <span>Instagram</span>
             </a>
           </div>
         </div>
-        <div class="contact-gallery" aria-label="Des voix réunies par ALTO">
-          <figure><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85" alt="Portrait d'une chanteuse" loading="lazy" decoding="async"></figure>
-          <figure><img src="./image/Choir-077.webp" alt="Chanteuse en scène face à son public" loading="lazy" decoding="async"></figure>
-          <figure><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85" alt="Portrait d'une musicienne" loading="lazy" decoding="async"></figure>
+        <!-- Galerie contact : vraies photos ALTO au lieu d'Unsplash -->
+        <div class="contact-gallery" aria-label="Voix réunies par ALTO">
+          <figure>
+            <img src="./image/Choir-069.webp" alt="Portrait artiste ALTO" loading="lazy" decoding="async">
+          </figure>
+          <figure>
+            <img src="./image/Choir-077.webp" alt="Artiste ALTO en scène" loading="lazy" decoding="async">
+          </figure>
+          <figure>
+            <img src="./image/Choir-054.webp" alt="Chœur ALTO" loading="lazy" decoding="async">
+          </figure>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>
     <div class="wrap">
       <div class="footer-top">
-        <div><div class="footer-brand"><img src="logo-mark.png" alt="" width="58" height="58" loading="lazy" decoding="async">ALTO</div><p class="footer-tagline">L'écho d'un renouveau.</p></div>
-        <div><p class="footer-heading">Explorer</p><nav class="footer-links" aria-label="Navigation secondaire"><a href="#programmation">Évenements</a><a href="#partenaires">Partenaires</a><a href="#vision">Notre vision</a><a href="#contact">Contact</a></nav></div>
-        <div><p class="footer-heading">La lettre ALTO</p><p class="footer-links">Restez informé du renouveau lyrique.</p><form class="newsletter"><label class="sr-only" for="newsletter-email">Votre adresse email</label><input id="newsletter-email" type="email" placeholder="Votre email" required><button type="submit" aria-label="S'inscrire à la newsletter">↗</button></form></div>
+        <div>
+          <div class="footer-brand">
+            <img src="logo-mark.png" alt="" width="58" height="58" loading="lazy" decoding="async">ALTO
+          </div>
+          <p class="footer-tagline">L'écho d'un renouveau.</p>
+        </div>
+        <div>
+          <p class="footer-heading">Explorer</p>
+          <nav class="footer-links" aria-label="Navigation secondaire">
+            <a href="#programmation">Événements</a>
+            <a href="#partenaires">Partenaires</a>
+            <a href="#vision">Notre vision</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <p class="footer-heading">La lettre ALTO</p>
+          <p class="footer-links">Restez informé du renouveau lyrique.</p>
+          <form class="newsletter">
+            <label class="sr-only" for="newsletter-email">Votre adresse email</label>
+            <input id="newsletter-email" type="email" placeholder="Votre email" required>
+            <button type="submit" aria-label="S'inscrire">↗</button>
+          </form>
+        </div>
       </div>
-      <div class="footer-bottom"><span>© 2026 ALTO</span><span>Mentions légales · Crédits</span></div>
+      <div class="footer-bottom">
+        <span>© 2026 ALTO</span>
+        <span>Mentions légales · Crédits</span>
+      </div>
     </div>
   </footer>
 
   <script>
-    /* ==== Page de chargement : masquée dès que tout est prêt (plancher anti-flash + filet de sécurité) ==== */
+    /* ── PRELOADER ── */
     (function () {
       const pre = document.getElementById('preloader');
       if (!pre) { document.body.classList.remove('preloading'); return; }
@@ -685,48 +742,48 @@
       setTimeout(hide, MAX_MS);
     })();
 
+    /* ── MENU MOBILE ── */
     const menuToggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('#main-menu');
     menuToggle.addEventListener('click', () => {
       const isOpen = menu.classList.toggle('is-open');
       menuToggle.setAttribute('aria-expanded', String(isOpen));
     });
-    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
       menu.classList.remove('is-open');
       menuToggle.setAttribute('aria-expanded', 'false');
     }));
 
-    const positioning = document.querySelector('.positioning');
-    const positioningVideo = document.querySelector('.positioning-video');
-    const positioningReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (positioning && positioningVideo) {
-      const positioningObserver = new IntersectionObserver(([entry]) => {
-        if (positioningReduceMotion) {
-          positioningVideo.pause();
-          return;
-        }
-        if (entry.isIntersecting) {
-          positioningVideo.play().catch(() => {
-            positioningVideo.load();
-          });
-        } else {
-          positioningVideo.pause();
-        }
-      }, { threshold: 0.2 });
-      positioningObserver.observe(positioning);
+    /* ── VIDÉO POSITIONNEMENT : lecture uniquement si visible ── */
+    const posVid = document.querySelector('.positioning-video');
+    const posSection = document.querySelector('.positioning');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (posVid && posSection) {
+      if (reduceMotion) {
+        posVid.pause();
+      } else {
+        new IntersectionObserver(([e]) => {
+          e.isIntersecting ? posVid.play().catch(() => posVid.load()) : posVid.pause();
+        }, { threshold: 0.2 }).observe(posSection);
+      }
     }
 
+    /* ── CARROUSEL ÉVÉNEMENTS ── */
     const eventsData = [
-      { badge: 'Concert', name: 'FEMMES en coeur', date: '25 octobre 2026 · 16h00', place: 'Cathédrale', img: 'https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=900&q=85' },
-      // { badge: 'Masterclass', name: 'Écouter autrement', date: '22 octobre 2026 · 14h00', place: 'Studio des voix ALTO', img: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85' },
-      // { badge: 'Rencontre', name: 'Rencontre avec les voix', date: '07 novembre 2026 · 18h30', place: 'Salon des artistes', img: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85' },
+      {
+        badge: 'Concert',
+        name: 'FEMMES en chœur',
+        date: '25 octobre 2026 · 16h00',
+        place: 'Cathédrale',
+        img: './image/Choir-064.webp'
+      },
     ];
     const eventFan = document.querySelector('.event-fan');
     if (eventFan) {
       const posters = {
-        left: eventFan.querySelector('[data-pos="left"]'),
+        left:   eventFan.querySelector('[data-pos="left"]'),
         center: eventFan.querySelector('[data-pos="center"]'),
-        right: eventFan.querySelector('[data-pos="right"]'),
+        right:  eventFan.querySelector('[data-pos="right"]'),
       };
       const n = eventsData.length;
       let current = 0;
@@ -739,38 +796,36 @@
       };
       const render = () => {
         fillPoster(posters.center, eventsData[current], 'center');
-        fillPoster(posters.left, eventsData[(current - 1 + n) % n], 'left');
-        fillPoster(posters.right, eventsData[(current + 1) % n], 'right');
-        document.querySelectorAll('.event-caption-value').forEach((el) => {
+        fillPoster(posters.left,   eventsData[(current - 1 + n) % n], 'left');
+        fillPoster(posters.right,  eventsData[(current + 1) % n], 'right');
+        document.querySelectorAll('.event-caption-value').forEach(el => {
           el.textContent = eventsData[current][el.dataset.field];
         });
       };
-      const go = (dir) => { current = (current + dir + n) % n; render(); };
-      posters.left.addEventListener('click', () => go(-1));
-      posters.right.addEventListener('click', () => go(1));
+      posters.left.addEventListener('click', () => { current = (current - 1 + n) % n; render(); });
+      posters.right.addEventListener('click', () => { current = (current + 1) % n; render(); });
       posters.center.addEventListener('click', () => { window.location.hash = '#contact'; });
-      document.querySelectorAll('.event-arrow').forEach((btn) => btn.addEventListener('click', () => go(Number(btn.dataset.dir))));
+      document.querySelectorAll('.event-arrow').forEach(btn =>
+        btn.addEventListener('click', () => { current = (current + Number(btn.dataset.dir) + n) % n; render(); })
+      );
       render();
     }
 
-    document.querySelectorAll('form').forEach((form) => form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const button = form.querySelector('button[type="submit"]');
-      if (button) {
-        const originalText = button.textContent;
-        button.textContent = 'Merci, à bientôt';
-        setTimeout(() => { button.textContent = originalText; }, 2600);
+    /* ── FORMULAIRES ── */
+    document.querySelectorAll('form').forEach(form => form.addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = 'Merci, à bientôt ✓';
+        setTimeout(() => { btn.textContent = orig; }, 2600);
       }
     }));
 
-    /* ==== Scroll reveal & parallax ==== */
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    /* Typewriter hero title — mixed typography */
+    /* ── TYPEWRITER HERO ── */
     const typeTitle = document.querySelector('#hero-title');
     if (typeTitle) {
       const target = typeTitle.querySelector('.type-text');
-      // Chaque segment : le texte + la classe de style à appliquer
       const segments = [
         { text: "L'", cls: 'w-echo' },
         { text: 'écho', cls: 'w-echo' },
@@ -778,13 +833,12 @@
         { text: 'RENOUVEAU', cls: 'w-strong' },
       ];
       const total = segments.reduce((s, seg) => s + seg.text.length, 0);
-      const charAt = (n) => {
-        // Reconstruit le HTML jusqu'au n-ième caractère en respectant les segments
+      const charAt = n => {
         let out = '', count = 0;
         for (const seg of segments) {
           if (count >= n) break;
           const take = Math.min(seg.text.length, n - count);
-          const chunk = seg.text.slice(0, take).replace(/ /g, ' ');
+          const chunk = seg.text.slice(0, take).replace(/ /g, '\u00a0');
           out += seg.cls ? `<span class="${seg.cls}">${chunk}</span>` : chunk;
           count += take;
         }
@@ -797,33 +851,25 @@
         let i = 0;
         const tick = () => {
           target.innerHTML = charAt(i);
-          if (i < total) {
-            i++;
-            setTimeout(tick, 70 + Math.random() * 60);
-          } else {
-            setTimeout(() => typeTitle.classList.add('type-done'), 900);
-          }
+          if (i < total) { i++; setTimeout(tick, 70 + Math.random() * 60); }
+          else setTimeout(() => typeTitle.classList.add('type-done'), 900);
         };
         setTimeout(tick, 450);
       }
     }
 
+    /* ── SCROLL REVEAL ── */
     if (!reduceMotion) {
-      const revealEls = document.querySelectorAll('[data-reveal], [data-reveal-title]');
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            io.unobserve(entry.target);
-          }
-        });
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
       }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-      revealEls.forEach((el) => io.observe(el));
+      document.querySelectorAll('[data-reveal], [data-reveal-title]').forEach(el => io.observe(el));
 
+      /* PARALLAX HERO — léger, composité */
       const heroBg = document.querySelector('.hero');
       const heroContent = document.querySelector('.hero-content');
       let ticking = false;
-      const onScroll = () => {
+      window.addEventListener('scroll', () => {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {
@@ -837,9 +883,7 @@
           }
           ticking = false;
         });
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      }, { passive: true });
     }
   </script>
 </body>
