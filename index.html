@@ -134,23 +134,27 @@
 
     /* ── GALERIE — OPTIMISÉE ── */
     .gallery { background: var(--paper); }
+    .gallery .wrap { width: min(100% - 32px, 1120px); }
     .gallery-head { margin-bottom: 40px; }
 
     /* ── MOSAÏQUE ÉDITORIALE ── */
     .gallery-mosaic {
       position: relative;
       display: grid;
-      width: min(100%, 1120px);
-      min-height: 620px;
+      width: 100%;
+      aspect-ratio: 1120 / 620;
       margin-inline: auto;
       grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: repeat(8, 1fr);
+      grid-template-rows: repeat(8, minmax(0, 1fr));
       gap: 0;
     }
 
     .mosaic-item {
       position: relative;
       z-index: 1;
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
       overflow: hidden;
       border: 7px solid var(--paper-light);
       border-radius: 10px;
@@ -165,7 +169,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      will-change: transform;
       transition: transform .7s cubic-bezier(.25,.46,.45,.94);
     }
 
@@ -175,7 +178,7 @@
       transform: rotate(0deg) translateY(-8px) scale(1.035);
     }
 
-    .mosaic-item:hover img { transform: scale(1.08); }
+    .mosaic-item:hover img { transform: scale(1.04); }
 
     .mosaic-item::after {
       position: absolute;
@@ -193,17 +196,18 @@
     .mosaic-item:nth-child(6) { grid-column: 10 / 13; grid-row: 4 / 9; --tilt: 3deg; z-index: 2; }
 
     @media (max-width: 800px) {
+      .gallery .wrap { width: min(100% - 32px, 600px); }
       .gallery-mosaic {
-        min-height: 540px;
+        aspect-ratio: 2 / 3;
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(8, 1fr);
+        grid-template-rows: repeat(8, minmax(0, 1fr));
       }
       .mosaic-item { border-width: 5px; border-radius: 8px; }
-      .mosaic-item:nth-child(1) { grid-column: 1 / 4; grid-row: 2 / 7; }
+      .mosaic-item:nth-child(1) { grid-column: 1 / 5; grid-row: 2 / 6; }
       .mosaic-item:nth-child(2) { grid-column: 3 / 7; grid-row: 1 / 4; }
       .mosaic-item:nth-child(3) { grid-column: 4 / 7; grid-row: 3 / 6; }
       .mosaic-item:nth-child(4) { grid-column: 1 / 5; grid-row: 5 / 9; }
-      .mosaic-item:nth-child(5) { grid-column: 3 / 7; grid-row: 6 / 9; }
+      .mosaic-item:nth-child(5) { grid-column: 4 / 7; grid-row: 6 / 9; }
       .mosaic-item:nth-child(6) { display: none; }
     }
 
@@ -514,7 +518,7 @@
           <!-- item 1 : large gauche — priorité haute, visible au-dessus du fold -->
           <figure class="mosaic-item">
             <img
-              src="./image/Choir-054.webp"
+              src="./image/Choir-054-gallery.webp"
               alt="Chœur en concert"
               loading="lazy"
               decoding="async"
@@ -524,7 +528,7 @@
           <!-- items 2-3 : colonne droite haute -->
           <figure class="mosaic-item">
             <img
-              src="./image/Choir-056.webp"
+              src="./image/Choir-056-gallery.webp"
               alt="Artiste en interprétation"
               loading="lazy"
               decoding="async"
@@ -533,7 +537,7 @@
           </figure>
           <figure class="mosaic-item">
             <img
-              src="./image/Choir-058.webp"
+              src="./image/Choir-058-gallery.webp"
               alt="Répétition du chœur"
               loading="lazy"
               decoding="async"
@@ -543,7 +547,7 @@
           <!-- items 4-5 : colonne centrale basse -->
           <figure class="mosaic-item">
             <img
-              src="./image/Choir-062.webp"
+              src="./image/Choir-062-gallery.webp"
               alt="Ensemble vocal ALTO"
               loading="lazy"
               decoding="async"
@@ -552,7 +556,7 @@
           </figure>
           <figure class="mosaic-item">
             <img
-              src="./image/Choir-064.webp"
+              src="./image/Choir-064-gallery.webp"
               alt="Moment de concert"
               loading="lazy"
               decoding="async"
@@ -562,7 +566,7 @@
           <!-- item 6 : large droite -->
           <figure class="mosaic-item">
             <img
-              src="./image/Choir-069.webp"
+              src="./image/Choir-069-gallery.webp"
               alt="Portrait d'artiste ALTO"
               loading="lazy"
               decoding="async"
