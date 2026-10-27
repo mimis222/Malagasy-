@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ALTO - L'écho d'un renouveau lyrique.">
+  <meta name="description" content="ALTO — L'écho d'un renouveau. Une scène lyrique et chorale pensée comme un mouvement vivant.">
+  <meta name="theme-color" content="#101b1b">
   <link rel="icon" href="favicon-64.png" type="image/png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- 2 polices au lieu de 5 -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
 
   <link rel="preload" as="image" href="logo-loader.webp" fetchpriority="high">
 
@@ -28,6 +29,7 @@
       --white: #fffdf8;
       --sans: 'Manrope', sans-serif;
       --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono: 'IBM Plex Mono', 'Courier New', monospace;
     }
 
     *,*::before,*::after { box-sizing: border-box; }
@@ -134,20 +136,28 @@
     .gallery { background: var(--paper); }
     .gallery-head { margin-bottom: 40px; }
 
+    /* ── MOSAÏQUE ÉDITORIALE ── */
     .gallery-mosaic {
+      position: relative;
       display: grid;
-      gap: 6px;
-      width: 100%;
-      /* Mobile : 2 colonnes, hauteurs fixes → zéro reflow */
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 180px 180px 180px 180px;
+      width: min(100%, 1120px);
+      min-height: 620px;
+      margin-inline: auto;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 0;
     }
 
     .mosaic-item {
       position: relative;
+      z-index: 1;
       overflow: hidden;
-      /* Placeholder sombre pendant le chargement → pas de blanc qui clignote */
+      border: 7px solid var(--paper-light);
+      border-radius: 10px;
       background: #1e1a14;
+      box-shadow: 0 18px 34px rgba(16,44,73,.16);
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s ease, z-index .1s;
     }
 
     .mosaic-item img {
@@ -155,54 +165,50 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      /* SUPPRIMÉ : filter saturate permanent — coûteux GPU à chaque frame */
-      /* will-change uniquement sur transform → composité = rapide */
       will-change: transform;
-      transition: transform .5s cubic-bezier(.25,.46,.45,.94);
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
     }
 
-    .mosaic-item:hover img {
-      transform: scale(1.05);
+    .mosaic-item:hover {
+      z-index: 8;
+      box-shadow: 0 28px 48px rgba(16,44,73,.25);
+      transform: rotate(0deg) translateY(-8px) scale(1.035);
     }
 
-    /* Overlay sombre au hover au lieu du filter */
+    .mosaic-item:hover img { transform: scale(1.08); }
+
     .mosaic-item::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.08), transparent 42%, rgba(9,29,49,.14));
       content: '';
-      position: absolute; inset: 0;
-      background: rgba(9,29,49,0);
-      transition: background .4s ease;
       pointer-events: none;
     }
-    .mosaic-item:hover::after {
-      background: rgba(9,29,49,.12);
-    }
 
-    /* Disposition mobile */
-    .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
-    .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; }
-    .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; }
-    .mosaic-item:nth-child(4) { grid-column: 1; grid-row: 3; }
-    .mosaic-item:nth-child(5) { grid-column: 2; grid-row: 3; }
-    .mosaic-item:nth-child(6) { grid-column: 1 / 3; grid-row: 4; }
+    .mosaic-item:nth-child(1) { grid-column: 1 / 5; grid-row: 2 / 8; --tilt: -3deg; z-index: 2; }
+    .mosaic-item:nth-child(2) { grid-column: 4 / 9; grid-row: 1 / 5; --tilt: 1.5deg; z-index: 4; }
+    .mosaic-item:nth-child(3) { grid-column: 8 / 13; grid-row: 2 / 6; --tilt: -2deg; z-index: 3; }
+    .mosaic-item:nth-child(4) { grid-column: 3 / 8; grid-row: 5 / 9; --tilt: 2deg; z-index: 5; }
+    .mosaic-item:nth-child(5) { grid-column: 7 / 11; grid-row: 5 / 9; --tilt: -1.5deg; z-index: 6; }
+    .mosaic-item:nth-child(6) { grid-column: 10 / 13; grid-row: 4 / 9; --tilt: 3deg; z-index: 2; }
 
-    /* Desktop */
-    @media (min-width: 801px) {
+    @media (max-width: 800px) {
       .gallery-mosaic {
-        grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
-        grid-template-rows: 260px 260px;
-        gap: 8px;
+        min-height: 540px;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(8, 1fr);
       }
-      .mosaic-item:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
-      .mosaic-item:nth-child(2) { grid-column: 2; grid-row: 1; }
-      .mosaic-item:nth-child(3) { grid-column: 2; grid-row: 2; }
-      .mosaic-item:nth-child(4) { grid-column: 3; grid-row: 1; }
-      .mosaic-item:nth-child(5) { grid-column: 3; grid-row: 2; }
-      .mosaic-item:nth-child(6) { grid-column: 4; grid-row: 1 / 3; }
+      .mosaic-item { border-width: 5px; border-radius: 8px; }
+      .mosaic-item:nth-child(1) { grid-column: 1 / 4; grid-row: 2 / 7; }
+      .mosaic-item:nth-child(2) { grid-column: 3 / 7; grid-row: 1 / 4; }
+      .mosaic-item:nth-child(3) { grid-column: 4 / 7; grid-row: 3 / 6; }
+      .mosaic-item:nth-child(4) { grid-column: 1 / 5; grid-row: 5 / 9; }
+      .mosaic-item:nth-child(5) { grid-column: 3 / 7; grid-row: 6 / 9; }
+      .mosaic-item:nth-child(6) { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .mosaic-item img { will-change: auto; transition: none; }
-      .mosaic-item::after { transition: none; }
+      .mosaic-item, .mosaic-item img { will-change: auto; transition: none; }
     }
 
     /* ── ÉVÉNEMENTS ── */
@@ -295,7 +301,7 @@
     .contact-gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
     .contact-gallery figure:hover img { transform: scale(1.04); }
 
-    /* ── FOOTER ── */
+    /* ─��� FOOTER ── */
     footer { padding: 70px 0 25px; background: var(--ink-deep); color: var(--white); }
     .footer-top { display: grid; grid-template-columns: 1fr; gap: 35px; padding-bottom: 45px; }
     .footer-brand { display: flex; align-items: center; gap: 15px; font: 500 2rem var(--serif); }
@@ -365,6 +371,72 @@
       .manifesto-card--topo.manifesto-card--flip::before { transform: scaleX(-1) scale(1.06); }
       .hero h1.type-done .w-strong { animation: none; }
     }
+
+    /* ALTO art direction: a quieter, more tactile editorial layer. */
+    :root { --ink: #172524; --ink-deep: #0b1515; --gold: #d39a4a; --gold-light: #f0c77c; --paper: #eee9df; --paper-light: #faf8f2; --line: rgba(23,37,36,.18); }
+    body { background: var(--paper); }
+    .wrap { width: min(100% - 40px, 1240px); }
+    .site-header { mix-blend-mode: normal; }
+    .nav { min-height: 68px; margin-top: 18px; border-radius: 4px; border-color: rgba(240,199,124,.3); background: rgba(11,21,21,.82); box-shadow: 0 18px 50px rgba(0,0,0,.2); }
+    .brand { letter-spacing: .38em; }
+    .brand img { width: 30px; height: 30px; }
+    .hero { min-height: min(880px, 100svh); }
+    .hero::before { background: linear-gradient(90deg, rgba(5,15,15,.94) 0%, rgba(5,15,15,.62) 43%, rgba(5,15,15,.08) 100%), url('bkg.jpeg') center/cover; filter: saturate(.78) contrast(1.06); }
+    .hero::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,21,21,.2), transparent 40%, rgba(11,21,21,.5)); content: ''; pointer-events: none; }
+    .hero-content { max-width: 940px; margin-left: auto; margin-right: auto; padding-top: 190px; }
+    .hero h1 { font-size: clamp(3.8rem, 10.2vw, 9.2rem); line-height: .86; letter-spacing: -.065em; }
+    .hero h1 .type-text { white-space: normal; }
+    .hero-subtitle { max-width: 420px; margin-top: 34px; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .hero-copy { max-width: 470px; color: rgba(255,255,255,.72); font-size: .96rem; }
+    .button { border-radius: 2px; }
+    .hero-actions .button { border-radius: 2px; }
+    section { padding: 110px 0; }
+    .positioning { background: #182827; }
+    .positioning::after { background: rgba(11,21,21,.68); }
+    .positioning-video { filter: grayscale(.65) blur(2px); opacity: .58; }
+    .section-title { letter-spacing: -.055em; }
+    .marquee-ribbon { padding: 28px 0; background: var(--gold); color: var(--ink-deep); }
+    .marquee-track span { font-family: var(--sans); font-size: .74rem; font-weight: 700; letter-spacing: .2em; }
+    .marquee-track span::after, .marquee-track span:nth-child(even)::after { color: var(--ink-deep); font-size: 1.4em; }
+    .gallery { background: var(--paper-light); }
+    .mosaic-item { border-radius: 2px; }
+    .events { background: var(--paper); }
+    .events-stage { border-radius: 2px; background: #152322; box-shadow: 0 22px 60px rgba(23,37,36,.18); }
+    .event-poster { border-radius: 2px; }
+    .manifesto { background-color: #0b1515; }
+    .manifesto-card { border-radius: 2px; }
+    .partners { background: #e4ded2; }
+    .partner-card { border-radius: 2px; }
+    .contact { background: #f5f1e9; }
+    .contact-form input, .contact-form select, .contact-form textarea { border-radius: 0; border-color: rgba(23,37,36,.35); background: transparent; }
+    footer { background: #0b1515; }
+    @media (min-width: 801px) { .hero-content { padding-top: 210px; } .nav { min-height: 76px; } }
+
+  /* ── TYPOGRAPHIE ÉDITORIALE ── */
+  .hero-subtitle::before { content: '—  '; color: var(--gold); font-family: var(--mono); font-style: normal; font-size: .7em; letter-spacing: 0; }
+  .section-title, .events-title { text-wrap: balance; }
+  .section-title span, .events-title span { display: inline-block; }
+  .section-title span::first-letter, .events-title span::first-letter { font-size: 1.16em; }
+  .section-intro, .hero-copy, .events-desc { text-wrap: pretty; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .62rem; letter-spacing: .15em; }
+  .eyebrow::before { display: inline-block; width: 24px; height: 1px; background: currentColor; content: ''; }
+  .button, .nav-links, .nav-action, .arrow-link, .scroll-note, .footer-heading, .event-caption-label { font-family: var(--mono); }
+  .button, .nav-action { font-size: .62rem; letter-spacing: .13em; }
+  .brand { font-family: var(--mono); font-size: .82rem; letter-spacing: .24em; }
+  .hero h1 { letter-spacing: -.045em; }
+  .hero-subtitle { letter-spacing: .015em; }
+  .event-caption-value { font-family: var(--serif); font-size: 1.15rem; }
+  .manifesto-card h3 { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+  .footer-links, .footer-bottom { font-family: var(--mono); }
+  .footer-tagline { font-size: 1.15rem; letter-spacing: .01em; }
+  @media (min-width: 801px) {
+    .hero h1 { max-width: 960px; }
+    .hero-subtitle { font-size: clamp(1.4rem, 2.2vw, 2.1rem); }
+    .section-title { font-size: clamp(3.3rem, 6.5vw, 6.4rem); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1 .w-strong { animation: none !important; }
+  }
   </style>
 </head>
 <body class="preloading">
@@ -514,7 +586,7 @@
       <div class="wrap">
         <div class="events-head">
           <h2 class="events-title" id="events-title" data-reveal-title><span>À l'affiche</span></h2>
-          <p class="events-desc" data-reveal style="--reveal-delay:120ms">Les événements d'ALTO - Chaque parole une nouvelle lumière qui s'allume </p>
+          <p class="events-desc" data-reveal style="--reveal-delay:120ms">Les événements d'ALTO — chaque parole, une nouvelle lumière qui s'allume.</p>
         </div>
         <div class="events-stage" data-reveal="scale" style="--reveal-delay:80ms">
           <div class="event-fan" role="group" aria-label="Affiches des prochains événements">
@@ -637,7 +709,7 @@
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-grid">
         <div>
-          <h2 class="section-title" id="contact-title" data-reveal-title><span>Rejoindre ALTO</span></h2>
+          <h2 class="section-title" id="contact-title" data-reveal-title><span>Rejoindre le mouvement</span></h2>
           <p class="section-intro" data-reveal style="--reveal-delay:120ms">Artiste, mécène, partenaire ou spectateur : écrivez-nous et faisons résonner la suite.</p>
           <form class="contact-form" action="#contact" method="post">
             <label>Nom <input type="text" name="nom" autocomplete="name" required></label>
